@@ -20,7 +20,7 @@ public:
 
         while (eating_location != "IN" && eating_location != "OUT")
         {
-            cout << "INVALID INPUT! ENTER EATING LOCATION AGAIN: ";
+            cout << "INVALID sINPUT! ENTER EATING LOCATION AGAIN: ";
             cin >> eating_location;
         }
 
