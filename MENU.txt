@@ -16,3 +16,6 @@
 16   Laccha_Parantha    40
 17   Naan               50
 18   Tandoori_Roti      30
+19   Samosa        25
+20   Kachori        20
+21   Panipuri        20
