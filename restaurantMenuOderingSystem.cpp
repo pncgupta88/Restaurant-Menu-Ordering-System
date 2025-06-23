@@ -38,7 +38,7 @@ class RMOS
     RMOS(){
         cout << endl;
         cout << "|| WELCOME TO RESTAURANT MENU ORDERING SYSTEM ||"<< endl << endl;
-        cout << "CHOOSE AN OPTION:" << endl << "1) EDIT MENU." << endl << "2) VIEW MENU AND PLACE ORDER." << endl << "3) Exit"<< endl << endl;
+        cout << "CHOOSE AN OPTION:" << endl << "1) EDIT MENU." << endl << "2) VIEW MENU AND PLACE ORDER." << endl << "3) EXIT"<< endl << endl;
         cout << "ENTER 1/2/3: ";
 
         while (!(cin >> first_choice) || (first_choice != 1 && first_choice != 2 && first_choice != 3))
@@ -118,7 +118,8 @@ class RMOS
 
 int auto_assign_new_itemID()
 {
-    ifstream menu("MENU.txt");
+    ifstream menu;
+    menu.open("MENU.txt");
     int id;
     int max_id = 0;
     string name;
@@ -137,7 +138,8 @@ int auto_assign_new_itemID()
 }
 bool check_duplicate(const string &new_itemname)
 {
-    ifstream menu("MENU.txt");
+    ifstream menu;
+    menu.open("MENU.txt");
 
     int id;
     string name;
@@ -223,7 +225,8 @@ void display_menu()
 vector<usable_menu> copymenuitems()
 {
     vector<usable_menu> menutotakeorder;
-    ifstream menu("MENU.txt");
+    ifstream menu;
+    menu.open("MENU.txt");
 
     usable_menu temp;
     while (menu >> temp.item_id >> temp.item_name >> temp.item_price )
@@ -237,6 +240,7 @@ void take_order()
 {
     vector<usable_menu> menu = copymenuitems();
     vector<save_order> order_details;
+    int order_no = 0;
 
     char order_more = 'Y';
     double total = 0;
@@ -326,7 +330,9 @@ void take_order()
             {
                 cout << endl << "YOUR ORDER IS SUCESSFULLY PLACED! PLEASE WAIT A MOMENT, YOUR ORDER IS BEING PREPARED..."<< endl << endl;
 
-                cout << "============Bill============"<<endl<<endl;
+                cout << "          TAX INVOICE          "<<endl;
+                cout << "-------------------------------"<<endl;
+                cout << "         SLAYER'S DEN          "
                 for (int i = 0; i < order_details.size(); i++)
                 {
                     cout << i+1 << ")ITEM ID: " << order_details[i].save_id<<endl;
@@ -339,12 +345,23 @@ void take_order()
                 cout << "  TOTAL AMOUNT: " << total << endl;
                 cout << "  EATING LOCATION: "<< eating_location<<endl;
 
-                ofstream billout("ORDER.txt");
+                ofstream billout;
+                billout.open("ORDER.txt"); //ios::app);
+
+                billout << "============Bill============"<<endl<<endl;
+                order_no++;
+                billout << "ORDER NO: " << order_no << endl<<endl;
 
                 for (int i = 0; i < order_details.size(); i++)
                 {
-                    billout << order_details[i].save_id <<"  "<< order_details[i].save_name << "  "<< order_details[i].save_qty << "  "<< order_details[i].save_unitprice << "  "<< order_details[i].save_itemtotal << endl;
+                    billout <<i+1<< ")ITEM ID: " <<order_details[i].save_id << endl 
+                            << "  ITEM NAME: "<< order_details[i].save_name << endl 
+                            << "  ITEM QUANTITY: "<< order_details[i].save_qty << endl 
+                            << "  ITEM UNITPRICE: "<< order_details[i].save_unitprice << endl 
+                            << "  ITEM SUBTOTAL: "<< order_details[i].save_itemtotal << endl << endl;
                 }
+
+                billout << "============================="<<endl <<endl;
                 
                 billout.close();
 
