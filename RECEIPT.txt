@@ -1,0 +1,38 @@
+-------------------------------
+          TAX INVOICE          
+-------------------------------
+    SLAYER'S DEN RESTAURANT    
+-------------------------------
+ORDER NO: 1
+DATE: 23/6/2025
+TIME: 23:24
+-------------------------------
+EATING LOCATION: DINE IN
+-------------------------------
+1)ITEM ID: 2
+  ITEM NAME: Cold_Coffee
+  ITEM QUANTITY: 2
+  ITEM UNITPRICE: 60
+  ITEM TOTAL: 120
+
+2)ITEM ID: 23
+  ITEM NAME: Vadapav
+  ITEM QUANTITY: 2
+  ITEM UNITPRICE: 20
+  ITEM TOTAL: 40
+
+3)ITEM ID: 1
+  ITEM NAME: Water_Bottle
+  ITEM QUANTITY: 1
+  ITEM UNITPRICE: 20
+  ITEM TOTAL: 20
+
+-------------------------------
+  SUBTOTAL: 180
+  CGST @ 2.5%: 4.5
+  SGST @ 2.5%: 4.5
+-------------------------------
+  GRAND TOTAL: 189
+-------------------------------
+
+
