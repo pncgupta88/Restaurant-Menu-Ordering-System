@@ -23,7 +23,7 @@ public:
         cout << "CHOOSE AN OPTION:" << endl
              << "1) EDIT MENU." << endl
              << "2) VIEW MENU AND PLACE ORDER." << endl
-             << "3) EXIT." << endl
+             << "3) EXIT" << endl
              << endl;
         cout << "ENTER 1/2/3: ";
 
@@ -124,24 +124,24 @@ public:
     {
         const int security_pass = 246810;
         int entered_pass;
-        int i = 1; // ATTEMPT
+        int attempt = 1;
 
         cout << endl
-             << "ENTER SECURITY PASS TO ACCESS THIS FEATURE (ATTEMPT-" << i << " OF 3): ";
+             << "ENTER SECURITY PASS TO ACCESS THIS FEATURE (ATTEMPT-" << attempt << " OF 3): ";
         while (!(cin >> entered_pass) || (entered_pass != security_pass))
         {
             cin.clear();
             cin.ignore(10000, '\n');
 
-            i++;
-            if (i > 3)
+            attempt++;
+            if (attempt > 3)
             {
                 cout << endl
                      << "ATTEMPTS OVER.";
                 return false;
             }
 
-            cout << "INCORRECT SECURITY PASS! ENTER CORRECT SECURITY PASS TO ACCESS THIS FEATURE (ATTEMPT-" << i << " OF 3): ";
+            cout << "INCORRECT SECURITY PASS! ENTER CORRECT SECURITY PASS TO ACCESS THIS FEATURE (ATTEMPT-" << attempt << " OF 3): ";
         }
 
         return true;
@@ -167,7 +167,7 @@ public:
         int new_id = max_id + 1;
         return new_id;
     }
-    bool check_duplicate(const string &new_itemname)
+    bool check_duplicate_menu_items(const string &new_itemname)
     {
         ifstream menu;
         menu.open("MENU.txt");
@@ -200,7 +200,7 @@ public:
             cout << "ENTER NEW ITEM'S NAME: ";
             cin >> new_itemname;
 
-            if (check_duplicate(new_itemname))
+            if (check_duplicate_menu_items(new_itemname))
             {
                 cout << endl
                      << "ITEM ALREADY EXISTS IN MENU!" << endl
@@ -272,6 +272,27 @@ public:
     }
 
     // int RMOS:: order_no = 0;
+
+    void merge_duplicate_order_items(vector<save_order> &orders)
+    {
+        for (int i = 0; i < orders.size(); ++i)
+        {
+            int j = i + 1;
+            while (j < orders.size())
+            {
+                if (orders[i].save_id == orders[j].save_id)
+                {
+                    orders[i].save_qty += orders[j].save_qty;
+                    orders[i].save_itemtotal += orders[j].save_itemtotal;
+                    orders.erase(orders.begin() + j); // no need to increment j
+                }
+                else
+                {
+                    j++; // only increment if no erase happened
+                }
+            }
+        }
+    }
 
     void take_order()
     {
@@ -368,6 +389,8 @@ public:
                 if (final_confirmation == 'P' || final_confirmation == 'p')
                 {
                     RMOS::order_no++;
+                    merge_duplicate_order_items(order_details);
+
                     cout << endl
                          << "YOUR ORDER IS SUCESSFULLY PLACED! PLEASE WAIT A MOMENT, YOUR ORDER IS BEING PREPARED..." << endl
                          << endl;
@@ -406,9 +429,12 @@ public:
                     total += subtotal + ((2.5 / 100) * subtotal) * 2;
 
                     cout << "  GRAND TOTAL: " << total << endl;
+                    cout << "-------------------------------" << endl;
+                    cout << "     THANK YOU VISIT AGAIN     " << endl;
                     cout << "-------------------------------" << endl
-                         << endl
-                         << endl;
+                            << endl
+                            << endl;
+                        
 
                     ofstream billout;
                     billout.open(("RECEIPT.txt"), ios::app);
@@ -444,6 +470,8 @@ public:
                     billout << "  SGST @ 2.5%: " << (2.5 / 100) * subtotal << endl;
                     billout << "-------------------------------" << endl;
                     billout << "  GRAND TOTAL: " << total << endl;
+                    billout << "-------------------------------" << endl;
+                    billout << "     THANK YOU VISIT AGAIN     " << endl;
                     billout << "-------------------------------" << endl
                             << endl
                             << endl;
