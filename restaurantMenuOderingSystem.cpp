@@ -4,18 +4,21 @@
 #include <vector>
 #include <ctime>
 #include <climits>
+#include <algorithm>
+#include <cctype>
 
 using namespace std;
 
-class RMOS
+class RMOS // Class
 {
 private:
     int first_choice;
     int insidefirst_choice;
     static int order_no;
+    const int security_pass = 246810;
 
 public:
-    RMOS()
+    RMOS() // Constructor
     {
         cout << endl;
         cout << "|| WELCOME TO RESTAURANT MENU ORDERING SYSTEM ||" << endl
@@ -23,20 +26,21 @@ public:
         cout << "CHOOSE AN OPTION:" << endl
              << "1) EDIT MENU." << endl
              << "2) VIEW MENU AND PLACE ORDER." << endl
-             << "3) EXIT" << endl
+             << "3) SEARCH ITEM IN MENU AND PLACE ORDER." << endl
+             << "4) EXIT SYSTEM." << endl
              << endl;
-        cout << "ENTER 1/2/3: ";
+        cout << "ENTER 1/2/3/4: ";
 
-        while (!(cin >> first_choice) || (first_choice != 1 && first_choice != 2 && first_choice != 3))
+        while (!(cin >> first_choice) || (first_choice != 1 && first_choice != 2 && first_choice != 4))
         {
             cout << "INVALID INPUT! ENTER 1/2/3: ";
             cin.clear();
             cin.ignore(10000, '\n');
         }
 
-        if (first_choice == 1)
+        if (first_choice == 1) // first_choice (Edit Menu) == 1 => Start
         {
-            if (!verify_security_pass())
+            if (!verify_security_pass()) // Security Check
             {
                 return;
             }
@@ -60,21 +64,21 @@ public:
                     cin.ignore(10000, '\n');
                 }
 
-                if (insidefirst_choice == 1)
+                if (insidefirst_choice == 1) // insidefirst_choice (Add Items) == 1 => Start
                 {
                     char addmore = 'Y';
 
                     while (addmore == 'Y' || addmore == 'y')
                     {
                         cout << endl
-                             << "ENTER NEW ITEM DETAILS" << endl
-                             << endl;
+                             << "ENTER NEW ITEM DETAILS." << endl;
+                        ;
                         add_newitem();
                         cout << endl
                              << "SUCESSFULLY ADDED NEW ITEM TO MENU." << endl
                              << endl;
 
-                        cout << "DO YOU WANT TO ADD MORE ITEMS. ENTER Y/y FOR 'YES' OR N/n FOR 'NO': ";
+                        cout << "DO YOU WANT TO ADD MORE ITEMS. ENTER Y FOR 'YES' OR N FOR 'NO': ";
                         while (!(cin >> addmore) || (addmore != 'y' && addmore != 'Y' && addmore != 'n' && addmore != 'N'))
                         {
                             cout << "INVALID INPUT! ENTER Y/y FOR 'YES' OR N/n FOR 'NO': ";
@@ -90,24 +94,41 @@ public:
                         }
                     }
                 }
-                else if (insidefirst_choice == 4)
+
+                // insidefirst_choice (Add Items) == 1 => End
+
+                else if (insidefirst_choice == 4) // insidefirst_choice (Return) == 4 => Start
                 {
                     return;
                 }
+
+                // insidefirst_choice (Return) == 4 => End
+
             }
+
+            // first_choice (Edit Menu) == 1 => End
+
         }
-        else if (first_choice == 2)
+        
+        else if (first_choice == 2) // first_choice (View Menu And Place Order) == 2 => Start
         {
             display_menu();
-
             cout << endl
                  << "PLACE YOUR ORDER: " << endl
                  << endl;
             take_order();
         }
-        else if (first_choice == 3)
+
+        // first_choice (View Menu And Place Order) == 2 => End        
+
+        // else if (first_choice == 3)
+        // {
+        //     display_menu();
+        // }
+
+        else if (first_choice == 4) // first_choice (Exit System)== 4 => Start
         {
-            if (!verify_security_pass())
+            if (!verify_security_pass()) // Security Check
             {
                 return;
             }
@@ -118,11 +139,16 @@ public:
                 exit(0);
             }
         }
+
+        // first_choice (Exit System) == 4 => End
     }
 
-    bool verify_security_pass()
-    {
-        const int security_pass = 246810;
+
+    // Member functions start from here.
+
+    // Security check function to differentiate access to features between the owner and the customer.
+    bool verify_security_pass() // Secutity check funcn => Start
+    {        
         int entered_pass;
         int attempt = 1;
 
@@ -146,8 +172,11 @@ public:
 
         return true;
     }
+    // Secutity check funcn => End
 
-    int auto_assign_new_itemID()
+
+    // Function that auto assign item id to newly added item.
+    int auto_assign_new_itemID() // Auto assign new item id funcn => Start
     {
         ifstream menu;
         menu.open("MENU.txt");
@@ -156,18 +185,36 @@ public:
         string name;
         double price;
 
-        while (menu >> id >> name >> price)
+        while (menu >> id)
         {
             if (id > max_id)
             {
                 max_id = id;
             }
+            menu.ignore(10000, '\n');
         }
 
         int new_id = max_id + 1;
         return new_id;
     }
-    bool check_duplicate_menu_items(const string &new_itemname)
+    // Secutity check funcn => End
+
+
+    // Function to make names of menu items uppercase
+    string make_menu_items_uppercase(string itemname) // Make menu items uppercase funcn => Start
+    {
+        for (int i = 0; i < itemname.size(); i++)
+        {
+            itemname[i] = toupper(itemname[i]);
+        }
+
+        return itemname;
+    }
+    // Make menu items uppercase funcn => End
+
+
+    // Function to check that entered new item is previously available or not
+    bool check_duplicate_menu_items(const string &new_itemname) // Check duplicate menu items funcn => Start
     {
         ifstream menu;
         menu.open("MENU.txt");
@@ -176,31 +223,68 @@ public:
         string name;
         double price;
 
+        string entered_newitem = make_menu_items_uppercase(new_itemname);
+
         while (menu >> id >> name >> price)
         {
-            if (name == new_itemname)
+            if (make_menu_items_uppercase(name) == entered_newitem)
             {
                 return true;
             }
         }
         return false;
     }
-    void add_newitem()
+    // Check duplicate menu items funcn => End
+
+
+    // Function to add new food item in menu
+    void add_newitem() // Add new item funcn => Start
     {
+        int new_itemid = auto_assign_new_itemID();
         ofstream add("MENU.txt", ios::app);
 
-        int new_itemid = auto_assign_new_itemID();
-        string new_itemname;
+        cin.ignore(1000000, '\n');
+
+        // int new_itemid = auto_assign_new_itemID();
+        string entered_new_itemname;
         double new_itemprice;
 
-        cout << "SYSTEM WILL ASSIGN ID TO NEW ITEM AUTOMATICALLY " << endl;
+        cout << "SYSTEM WILL ASSIGN ID TO NEW ITEM AUTOMATICALLY " << endl
+             << endl;
+
+        // cin.ignore(1000000, '\n');
 
         while (true)
         {
-            cout << "ENTER NEW ITEM'S NAME: ";
-            cin >> new_itemname;
+            cout << "ENTER NEW ITEM'S NAME (ONLY LETTERS AND SPACES ARE ALLOWED): ";
+            // cin.ignore(1000000, '\n');
+            // cin.clear();
+            getline(cin, entered_new_itemname);            
 
-            if (check_duplicate_menu_items(new_itemname))
+            if (entered_new_itemname.empty())
+            {
+                cout << "INVALID ITEMNAME! NAME CANNOT BE BLANK.\n\n";
+                continue;
+            }
+
+            bool valid_itemname = true;
+
+            for (int i = 0; i < entered_new_itemname.size(); i++)
+            {
+                if (!isalpha(entered_new_itemname[i]) && entered_new_itemname[i] != ' ')
+                {
+                    valid_itemname = false;
+                    break;
+                }
+            }
+
+            if (!valid_itemname)
+            {
+                cout << "INVALID ITEMNAME! ";
+                continue;
+            }
+
+            if (check_duplicate_menu_items(entered_new_itemname))
             {
                 cout << endl
                      << "ITEM ALREADY EXISTS IN MENU!" << endl
@@ -212,20 +296,35 @@ public:
             }
         }
 
+        string new_itemname = make_menu_items_uppercase(entered_new_itemname);
+
         cout << "ENTER NEW ITEM'S PRICE: ";
-        cin >> new_itemprice;
+
+        while (!(cin >> new_itemprice))
+        {
+            cout << "INVALID INPUT! ENTER NEW ITEM'S PRICE: ";
+            cin.clear();
+            cin.ignore(10000, '\n');
+        }
+
         add << new_itemid << "   " << new_itemname << "        " << new_itemprice << endl;
     }
+    // Add new item funcn => End
+
+
 
     // void delete_item()
     // {
 
     // }
 
-    void display_menu()
+
+    // Function to display menu.
+    void display_menu() // Display Menu funcn => Start
     {
         ifstream item_menu;
         item_menu.open("MENU.txt");
+
 
         cout << "\n=============MENU=============\n\n";
         cout << "Id.  item Name       Price(Rs)" << endl
@@ -242,13 +341,21 @@ public:
 
         item_menu.close();
     }
-    struct usable_menu
+    // Display Menu funcn => End
+
+
+    // User defined data type to store item ID, name, and price of a menu item 
+    struct usable_menu // Start
     {
         int item_id;
         string item_name;
         double item_price;
     };
-    struct save_order
+    // End
+
+
+    // User defined data type to store item details of ordered item
+    struct save_order // Start
     {
         int save_id;
         string save_name;
@@ -256,7 +363,11 @@ public:
         double save_unitprice;
         double save_itemtotal;
     };
-    vector<usable_menu> copymenuitems()
+    // End
+
+
+    // Function to replicate menu items into a usable format for customer orders
+    vector<usable_menu> copymenuitems() // copymenuitems funcn => Start
     {
         vector<usable_menu> menutotakeorder;
         ifstream menu;
@@ -270,10 +381,21 @@ public:
         menu.close();
         return menutotakeorder;
     }
+    // copymenuitems funcn => End
 
-    // int RMOS:: order_no = 0;
 
-    void merge_duplicate_order_items(vector<save_order> &orders)
+    // Function to search menu item with name 
+    void search_menu_item() // Search menu item funcn => Start
+    {
+        vector<usable_menu> menu = copymenuitems();
+
+        string searched_itemname;
+    }
+    // Search menu item funcn => End
+
+
+    // Function that check's and merge's duplicate ordered items 
+    void merge_duplicate_order_items(vector<save_order> &orders) // Merge duplicate order items funcn => Start
     {
         for (int i = 0; i < orders.size(); ++i)
         {
@@ -293,8 +415,11 @@ public:
             }
         }
     }
+    // Search menu item funcn => End
 
-    void take_order()
+
+    // Function to take order, save each ordered item, made bill
+    void take_order() // Take order funcn => Start
     {
         vector<usable_menu> menu = copymenuitems();
         vector<save_order> order_details;
@@ -432,9 +557,8 @@ public:
                     cout << "-------------------------------" << endl;
                     cout << "     THANK YOU VISIT AGAIN     " << endl;
                     cout << "-------------------------------" << endl
-                            << endl
-                            << endl;
-                        
+                         << endl
+                         << endl;
 
                     ofstream billout;
                     billout.open(("RECEIPT.txt"), ios::app);
@@ -493,8 +617,12 @@ public:
             }
         }
     }
+    // Take order funcn => Start
+
 };
 
+
+// Static int for order num
 int RMOS::order_no = 0;
 
 int main()
