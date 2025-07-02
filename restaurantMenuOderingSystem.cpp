@@ -35,7 +35,7 @@ public:
 
         while (!(cin >> first_choice) || (first_choice != 1 && first_choice != 2 && first_choice != 3 && first_choice != 4 && first_choice != 5 && first_choice != 6))
         {
-            cout << "INVALID INPUT! ENTER 1/2/3: ";
+            cout << "INVALID searched_word! ENTER 1/2/3: ";
             cin.clear();
             cin.ignore(10000, '\n');
         }
@@ -47,7 +47,7 @@ public:
             cout << "ENTER g/G TO GIVE ORDER OR r/R TO RETURN TO HOME SCREEN: ";
             while (!(cin >> g_OR_y) || (g_OR_y != 'g' && g_OR_y != 'G' && g_OR_y != 'r' && g_OR_y != 'R'))
             {
-                cout << "INVALID INPUT! ENTER g/G TO GIVE ORDER OR r/R TO RETURN TO HOME SCREEN: ";
+                cout << "INVALID searched_word! ENTER g/G TO GIVE ORDER OR r/R TO RETURN TO HOME SCREEN: ";
                 cin.clear();
                 cin.ignore(10000, '\n');
             }
@@ -68,28 +68,130 @@ public:
 
         else if (first_choice == 2) // first_choice (SEARCH ITEM IN MENU AND PLACE ORDER.) => Start
         {
-            cout << endl << "WORK IN PROGERSS" << endl;
-            return;
+            char searchmore = 'Y';
+
+            while (searchmore == 'Y' || searchmore == 'y')
+            {
+                cout << endl;
+                display_menu();
+
+                search_menu_item();
+                cout << endl
+                     << "DO YOU WANT TO SEARCH MORE ITEMS. ENTER Y FOR 'YES' OR N FOR 'NO': ";
+
+                while (!(cin >> searchmore) || (searchmore != 'y' && searchmore != 'Y' && searchmore != 'n' && searchmore != 'N'))
+                {
+                    cout << "INVALID INPUT! ENTER Y/y FOR 'YES' OR N/n FOR 'NO': ";
+                    cin.clear();
+                    cin.ignore(10000, '\n');
+                }
+
+                if (searchmore == 'N' || searchmore == 'n')
+                {
+                    char g_OR_y;
+                    cout << endl
+                         << "ENTER g/G TO GIVE ORDER OR r/R TO RETURN TO HOME SCREEN: ";
+                    while (!(cin >> g_OR_y) || (g_OR_y != 'g' && g_OR_y != 'G' && g_OR_y != 'r' && g_OR_y != 'R'))
+                    {
+                        cout << "INVALID searched_word! ENTER g/G TO GIVE ORDER OR r/R TO RETURN TO HOME SCREEN: ";
+                        cin.clear();
+                        cin.ignore(10000, '\n');
+                    }
+
+                    if (g_OR_y == 'g' || g_OR_y == 'G')
+                    {
+                        cout << endl
+                             << "GIVE YOUR ORDER: " << endl
+                             << endl;
+                        take_order();
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+            }
         }
         // first_choice (SEARCH ITEM IN MENU AND PLACE ORDER.) => End
 
         else if (first_choice == 3) // first_choice (SORT MENU (PRICE LOW TO HIGH).) => Start
         {
-            cout << endl << "WORK IN PROGERSS" << endl;
-            return;
+            vector<usable_menu> sorted_menu = sort_menu_pricelowtohigh();
+            cout << "\n==========SORTED MENU==========\n\n";
+            cout << "Id.  item Name       Price(Rs)" << endl
+                 << endl;
+            for (int i = 0; i < sorted_menu.size(); i++)
+            {
+                const usable_menu &item_details = sorted_menu[i];
+
+                cout << item_details.item_id << "    " << item_details.item_name << "     " << item_details.item_price << endl;
+            }
+
+            char g_OR_y;
+            cout << endl
+                 << "ENTER g/G TO GIVE ORDER OR r/R TO RETURN TO HOME SCREEN: ";
+            while (!(cin >> g_OR_y) || (g_OR_y != 'g' && g_OR_y != 'G' && g_OR_y != 'r' && g_OR_y != 'R'))
+            {
+                cout << "INVALID searched_word! ENTER g/G TO GIVE ORDER OR r/R TO RETURN TO HOME SCREEN: ";
+                cin.clear();
+                cin.ignore(10000, '\n');
+            }
+
+            if (g_OR_y == 'g' || g_OR_y == 'G')
+            {
+                cout << endl
+                     << "GIVE YOUR ORDER: " << endl
+                     << endl;
+                take_order();
+            }
+            else
+            {
+                return;
+            }
         }
         // first_choice (SORT MENU (PRICE LOW TO HIGH).) => End
 
         else if (first_choice == 4) // first_choice (SORT MENU (PRICE HIGH TO LOW).) => Start
         {
-            cout << endl << "WORK IN PROGERSS" << endl;
-            return;
+            vector<usable_menu> sorted_menu = sort_menu_pricehightolow();
+            cout << "\n==========SORTED MENU==========\n\n";
+            cout << "Id.  item Name       Price(Rs)" << endl
+                 << endl;
+            for (int i = 0; i < sorted_menu.size(); i++)
+            {
+                const usable_menu &item_details = sorted_menu[i];
+
+                cout << item_details.item_id << "    " << item_details.item_name << "     " << item_details.item_price << endl;
+            }
+            
+            char g_OR_y;
+            cout << endl
+                 << "ENTER g/G TO GIVE ORDER OR r/R TO RETURN TO HOME SCREEN: ";
+            while (!(cin >> g_OR_y) || (g_OR_y != 'g' && g_OR_y != 'G' && g_OR_y != 'r' && g_OR_y != 'R'))
+            {
+                cout << "INVALID searched_word! ENTER g/G TO GIVE ORDER OR r/R TO RETURN TO HOME SCREEN: ";
+                cin.clear();
+                cin.ignore(10000, '\n');
+            }
+
+            if (g_OR_y == 'g' || g_OR_y == 'G')
+            {
+                cout << endl
+                     << "GIVE YOUR ORDER: " << endl
+                     << endl;
+                take_order();
+            }
+            else
+            {
+                return;
+            }
         }
         // first_choice (SORT MENU (PRICE HIGH TO LOW).) => Start
 
         else if (first_choice == 5) // first_choice (SORT MENU (ALPHABETICAL ORDER).) => Start
         {
-            cout << endl << "WORK IN PROGERSS" << endl;
+            cout << endl
+                 << "WORK IN PROGERSS" << endl;
             return;
         }
         // first_choice (SORT MENU (ALPHABETICAL ORDER).) => End
@@ -114,7 +216,7 @@ public:
                 cout << "ENTER 1/2: ";
                 while (!(cin >> inside_settings) || (inside_settings != 1 && inside_settings != 2))
                 {
-                    cout << "INVALID INPUT! ENTER 1/2: ";
+                    cout << "INVALID searched_word! ENTER 1/2: ";
                     cin.clear();
                     cin.ignore(10000, '\n');
                 }
@@ -132,7 +234,7 @@ public:
 
                     while (!(cin >> inside_editmenu) || (inside_editmenu != 1 && inside_editmenu != 2 && inside_editmenu != 3 && inside_editmenu != 4)) //))
                     {
-                        cout << "INVALID INPUT! ENTER 1/2/3/4: ";
+                        cout << "INVALID searched_word! ENTER 1/2/3/4: ";
                         cin.clear();
                         cin.ignore(10000, '\n');
                     }
@@ -154,7 +256,7 @@ public:
                             cout << "DO YOU WANT TO ADD MORE ITEMS. ENTER Y FOR 'YES' OR N FOR 'NO': ";
                             while (!(cin >> addmore) || (addmore != 'y' && addmore != 'Y' && addmore != 'n' && addmore != 'N'))
                             {
-                                cout << "INVALID INPUT! ENTER Y/y FOR 'YES' OR N/n FOR 'NO': ";
+                                cout << "INVALID searched_word! ENTER Y/y FOR 'YES' OR N/n FOR 'NO': ";
                                 cin.clear();
                                 cin.ignore(10000, '\n');
                             }
@@ -172,14 +274,16 @@ public:
 
                     else if (inside_editmenu == 2) // inside_editmenu (Delete Items) => Start
                     {
-                        cout << endl << "WORK IN PROGERSS" << endl; 
+                        cout << endl
+                             << "WORK IN PROGERSS" << endl;
                         return;
                     }
                     // inside_editmenu (Add Items) => End
 
                     else if (inside_editmenu == 3) // inside_editmenu (Edit Items) => Start
                     {
-                        cout << endl << "WORK IN PROGERSS" << endl;
+                        cout << endl
+                             << "WORK IN PROGERSS" << endl;
                         return;
                     }
                     // inside_editmenu (Add Items) => End
@@ -194,7 +298,8 @@ public:
                 else if (inside_settings == 2)
                 {
                     cout << endl
-                         << "EXITING..." << endl << endl;
+                         << "EXITING..." << endl
+                         << endl;
                     exit(0);
                 }
             }
@@ -238,6 +343,13 @@ public:
     {
         ifstream menu;
         menu.open("MENU.txt");
+
+        // if (!menu)
+        // {
+        //     cout << "MENU FILE IS MISSING." << endl;
+        //     return;
+        // }
+
         int id;
         int max_id = 0;
         string name;
@@ -255,10 +367,10 @@ public:
         int new_id = max_id + 1;
         return new_id;
     }
-    // Secutity check funcn => End
+    // Auto assign new item id funcn => End
 
-    // Function to make names of menu items uppercase
-    string final_menu_itemname(string itemname) // Make menu items uppercase funcn => Start
+    // Function to format names of menu items.
+    string final_menu_itemname(string itemname) // Format menu items funcn => Start
     {
         string final_itemname;
         bool new_word = true;
@@ -270,30 +382,37 @@ public:
                 if (!final_itemname.empty() && final_itemname.back() != '_')
                 {
                     final_itemname += '_';
-                    
-                }         
+                }
                 new_word = true;
-            }else 
+            }
+            else
             {
                 if (new_word)
                 {
-                   final_itemname += toupper(itemname[i]); 
-                }else
+                    final_itemname += toupper(itemname[i]);
+                }
+                else
                 {
                     final_itemname += tolower(itemname[i]);
                 }
                 new_word = false;
-            } 
+            }
         }
         return final_itemname;
     }
-    // Make menu items uppercase funcn => End
+    // Format menu items funcn => End
 
     // Function to check that entered new item is previously available or not
     bool check_duplicate_menu_items(const string &new_itemname) // Check duplicate menu items funcn => Start
     {
         ifstream menu;
         menu.open("MENU.txt");
+
+        // if (!menu)
+        // {
+        //     cout << "MENU FILE IS MISSING." << endl;
+        //     return;
+        // }
 
         int id;
         string name;
@@ -317,6 +436,12 @@ public:
     {
         int new_itemid = auto_assign_new_itemID();
         ofstream add("MENU.txt", ios::app);
+
+        if (!add)
+        {
+            cout << "Menu file missing." << endl;
+            return;
+        }
 
         cin.ignore(1000000, '\n');
 
@@ -377,12 +502,13 @@ public:
 
         while (!(cin >> new_itemprice))
         {
-            cout << "INVALID INPUT! ENTER NEW ITEM'S PRICE: ";
+            cout << "INVALID searched_word! ENTER NEW ITEM'S PRICE: ";
             cin.clear();
             cin.ignore(10000, '\n');
         }
 
         add << new_itemid << "   " << new_itemname << "        " << new_itemprice << endl;
+        add.close();
     }
     // Add new item funcn => End
 
@@ -396,6 +522,12 @@ public:
     {
         ifstream item_menu;
         item_menu.open("MENU.txt");
+
+        if (!item_menu)
+        {
+            cout << "MENU FILE IS MISSING." << endl;
+            return;
+        }
 
         cout << "\n=============MENU=============\n\n";
         cout << "Id.  item Name       Price(Rs)" << endl
@@ -441,6 +573,12 @@ public:
         ifstream menu;
         menu.open("MENU.txt");
 
+        // if (!menu)
+        // {
+        //     cout << "MENU FILE IS MISSING." << endl;
+        //     return;
+        // }
+
         usable_menu temp;
         while (menu >> temp.item_id >> temp.item_name >> temp.item_price)
         {
@@ -450,15 +588,6 @@ public:
         return menutotakeorder;
     }
     // copymenuitems funcn => End
-
-    // Function to search menu item with name
-    void search_menu_item() // Search menu item funcn => Start
-    {
-        vector<usable_menu> menu = copymenuitems();
-
-        string searched_itemname;
-    }
-    // Search menu item funcn => End
 
     // Function that check's and merge's duplicate ordered items
     void merge_duplicate_order_items(vector<save_order> &orders) // Merge duplicate order items funcn => Start
@@ -481,7 +610,7 @@ public:
             }
         }
     }
-    // Search menu item funcn => End
+    // Merge menu item funcn => End
 
     // Function to take order, save each ordered item, made bill
     void take_order() // Take order funcn => Start
@@ -504,13 +633,15 @@ public:
             cin.ignore(10000, '\n');
         }
 
+        cin.ignore(10000, '\n');
+
         while (order_more == 'Y' || order_more == 'y')
         {
             cout << "ENTER ITEM ID: ";
             int entered_id;
             while (!(cin >> entered_id))
             {
-                cout << "INVALID INPUT! ENTER ITEM ID FROM MENU: ";
+                cout << "INVALID searched_word! ENTER ITEM ID FROM MENU: ";
                 cin.clear();
                 cin.ignore(10000, '\n');
             }
@@ -533,11 +664,13 @@ public:
                 continue;
             }
 
+            cin.ignore(10000, '\n');
+
             int qty;
             cout << "ENTER QUANTITY OF " << selected_item.item_name << " : ";
             while (!(cin >> qty) || qty < 0)
             {
-                cout << "INVALID INPUT! ENTER QUANTITY OF " << selected_item.item_name << " : ";
+                cout << "INVALID searched_word! ENTER QUANTITY OF " << selected_item.item_name << " : ";
                 cin.clear();
                 cin.ignore(10000, '\n');
             }
@@ -557,7 +690,7 @@ public:
                  << "DO YOU WANT TO ADD MORE ITEMS. ENTER Y/y FOR 'YES' OR N/n FOR 'NO': ";
             while (!(cin >> order_more) || (order_more != 'Y' && order_more != 'y' && order_more != 'N' && order_more != 'n'))
             {
-                cout << "INVALID INPUT! ENTER Y/y FOR 'YES' OR N/n FOR 'NO': ";
+                cout << "INVALID searched_word! ENTER Y/y FOR 'YES' OR N/n FOR 'NO': ";
                 cin.clear();
                 cin.ignore(10000, '\n');
             }
@@ -571,7 +704,7 @@ public:
                 char final_confirmation;
                 while (!(cin >> final_confirmation) || (final_confirmation != 'P' && final_confirmation != 'p' && final_confirmation != 'C' && final_confirmation != 'c'))
                 {
-                    cout << "INVALID INPUT! ENTER P/p TO PLACE ORDER OR C/c TO CANCEL THE ORDER: ";
+                    cout << "INVALID searched_word! ENTER P/p TO PLACE ORDER OR C/c TO CANCEL THE ORDER: ";
                     cin.clear();
                     cin.ignore(10000, '\n');
                 }
@@ -625,47 +758,101 @@ public:
                          << endl
                          << endl;
 
-                    ofstream billout;
-                    billout.open(("RECEIPT.txt"), ios::app);
+                    ofstream receiptout;
+                    receiptout.open(("RECEIPT.txt"));
 
-                    billout << "-------------------------------" << endl;
-                    billout << "          TAX INVOICE          " << endl;
-                    billout << "-------------------------------" << endl;
-                    billout << "    SLAYER'S DEN RESTAURANT    " << endl;
-                    billout << "-------------------------------" << endl;
-                    billout << "ORDER NO: " << order_no << endl;
-                    billout << "DATE: " << (localTime->tm_mday) << "/"
-                            << (localTime->tm_mon + 1) << "/"
-                            << (1900 + localTime->tm_year) << endl;
-                    billout << "TIME: " << (localTime->tm_hour) << ":"
-                            << (localTime->tm_min < 10 ? "0" : "") << localTime->tm_min << endl;
-                    billout << "-------------------------------" << endl;
-                    billout << "EATING LOCATION: DINE " << eating_location << endl;
-                    billout << "-------------------------------" << endl;
+                    if (!receiptout)
+                    {
+                        cout << "Menu file missing." << endl;
+                        return;
+                    }
+
+                    receiptout << "-------------------------------" << endl;
+                    receiptout << "          TAX INVOICE          " << endl;
+                    receiptout << "-------------------------------" << endl;
+                    receiptout << "    SLAYER'S DEN RESTAURANT    " << endl;
+                    receiptout << "-------------------------------" << endl;
+                    receiptout << "ORDER NO: " << order_no << endl;
+                    receiptout << "DATE: " << (localTime->tm_mday) << "/"
+                               << (localTime->tm_mon + 1) << "/"
+                               << (1900 + localTime->tm_year) << endl;
+                    receiptout << "TIME: " << (localTime->tm_hour) << ":"
+                               << (localTime->tm_min < 10 ? "0" : "") << localTime->tm_min << endl;
+                    receiptout << "-------------------------------" << endl;
+                    receiptout << "EATING LOCATION: DINE " << eating_location << endl;
+                    receiptout << "-------------------------------" << endl;
 
                     for (int i = 0; i < order_details.size(); i++)
                     {
-                        billout << i + 1 << ")ITEM ID: " << order_details[i].save_id << endl
-                                << "  ITEM NAME: " << order_details[i].save_name << endl
-                                << "  ITEM QUANTITY: " << order_details[i].save_qty << endl
-                                << "  ITEM UNITPRICE: " << order_details[i].save_unitprice << endl
-                                << "  ITEM TOTAL: " << order_details[i].save_itemtotal << endl
-                                << endl;
+                        receiptout << i + 1 << ")ITEM ID: " << order_details[i].save_id << endl
+                                   << "  ITEM NAME: " << order_details[i].save_name << endl
+                                   << "  ITEM QUANTITY: " << order_details[i].save_qty << endl
+                                   << "  ITEM UNITPRICE: " << order_details[i].save_unitprice << endl
+                                   << "  ITEM TOTAL: " << order_details[i].save_itemtotal << endl
+                                   << endl;
                     }
 
-                    billout << "-------------------------------" << endl;
-                    billout << "  SUBTOTAL: " << subtotal << endl;
-                    billout << "  CGST @ 2.5%: " << (2.5 / 100) * subtotal << endl;
-                    billout << "  SGST @ 2.5%: " << (2.5 / 100) * subtotal << endl;
-                    billout << "-------------------------------" << endl;
-                    billout << "  GRAND TOTAL: " << total << endl;
-                    billout << "-------------------------------" << endl;
-                    billout << "     THANK YOU VISIT AGAIN     " << endl;
-                    billout << "-------------------------------" << endl
-                            << endl
-                            << endl;
+                    receiptout << "-------------------------------" << endl;
+                    receiptout << "  SUBTOTAL: " << subtotal << endl;
+                    receiptout << "  CGST @ 2.5%: " << (2.5 / 100) * subtotal << endl;
+                    receiptout << "  SGST @ 2.5%: " << (2.5 / 100) * subtotal << endl;
+                    receiptout << "-------------------------------" << endl;
+                    receiptout << "  GRAND TOTAL: " << total << endl;
+                    receiptout << "-------------------------------" << endl;
+                    receiptout << "     THANK YOU VISIT AGAIN     " << endl;
+                    receiptout << "-------------------------------" << endl
+                               << endl
+                               << endl;
 
-                    billout.close();
+                    receiptout.close();
+
+                    ofstream orderout;
+                    orderout.open(("ORDER.txt"), ios::app);
+
+                    if (!orderout)
+                    {
+                        cout << "Menu file missing." << endl;
+                        return;
+                    }
+
+                    orderout << "-------------------------------" << endl;
+                    orderout << "          TAX INVOICE          " << endl;
+                    orderout << "-------------------------------" << endl;
+                    orderout << "    SLAYER'S DEN RESTAURANT    " << endl;
+                    orderout << "-------------------------------" << endl;
+                    orderout << "ORDER NO: " << order_no << endl;
+                    orderout << "DATE: " << (localTime->tm_mday) << "/"
+                             << (localTime->tm_mon + 1) << "/"
+                             << (1900 + localTime->tm_year) << endl;
+                    orderout << "TIME: " << (localTime->tm_hour) << ":"
+                             << (localTime->tm_min < 10 ? "0" : "") << localTime->tm_min << endl;
+                    orderout << "-------------------------------" << endl;
+                    orderout << "EATING LOCATION: DINE " << eating_location << endl;
+                    orderout << "-------------------------------" << endl;
+
+                    for (int i = 0; i < order_details.size(); i++)
+                    {
+                        orderout << i + 1 << ")ITEM ID: " << order_details[i].save_id << endl
+                                 << "  ITEM NAME: " << order_details[i].save_name << endl
+                                 << "  ITEM QUANTITY: " << order_details[i].save_qty << endl
+                                 << "  ITEM UNITPRICE: " << order_details[i].save_unitprice << endl
+                                 << "  ITEM TOTAL: " << order_details[i].save_itemtotal << endl
+                                 << endl;
+                    }
+
+                    orderout << "-------------------------------" << endl;
+                    orderout << "  SUBTOTAL: " << subtotal << endl;
+                    orderout << "  CGST @ 2.5%: " << (2.5 / 100) * subtotal << endl;
+                    orderout << "  SGST @ 2.5%: " << (2.5 / 100) * subtotal << endl;
+                    orderout << "-------------------------------" << endl;
+                    orderout << "  GRAND TOTAL: " << total << endl;
+                    orderout << "-------------------------------" << endl;
+                    orderout << "     THANK YOU VISIT AGAIN     " << endl;
+                    orderout << "-------------------------------" << endl
+                             << endl
+                             << endl;
+
+                    orderout.close();
 
                     cout << endl
                          << "  BILL SUSCESSFULLY SAVED IN RECEIPT.txt FILE." << endl;
@@ -682,7 +869,138 @@ public:
             }
         }
     }
-    // Take order funcn => Start
+    // Take order funcn => End
+
+    void search_menu_item()
+    {
+
+        ifstream menu;
+        menu.open("MENU.txt");
+
+        // if (!menu)
+        // {
+        //     cout << "MENU FILE IS MISSING." << endl;
+        //     return;
+        // }
+
+        cin.ignore(1000000, '\n');
+
+        string searched_word;
+
+        while (true)
+        {
+            cout << "SEARCH: ";
+            getline(cin, searched_word);
+
+            if (searched_word.empty())
+            {
+                cout << "INVALID INPUT! SEARCH CANNOT BE BLANK." << endl;
+                continue;
+            }
+
+            bool validate_search = true;
+
+            for (int i = 0; i < searched_word.size(); i++)
+            {
+                if (!isalpha(searched_word[i]) && searched_word[i] != '_')
+                {
+                    validate_search = false;
+                    break;
+                }
+            }
+
+            if (!validate_search)
+            {
+                cout << "INVALID SEARCH!";
+                continue;
+            }
+
+            string formated_searched_word = final_menu_itemname(searched_word);
+
+            int id;
+            string name;
+            float price;
+            bool found = false;
+
+            cout << endl
+                 << "Id.  item Name       Price(Rs)" << endl
+                 << endl;
+
+            while (menu >> id >> name >> price)
+            {
+                bool match = false;
+
+                for (int i = 0; i <= name.size() - formated_searched_word.size(); i++)
+                {
+                    int j;
+                    for (j = 0; j < formated_searched_word.size(); j++)
+                    {
+                        if (name[i + j] != formated_searched_word[j])
+                        {
+                            break;
+                        }
+                    }
+                    if (j == formated_searched_word.size())
+                    {
+                        match = true;
+                        break;
+                    }
+                }
+
+                if (match)
+                {
+                    cout << id << "    " << name << "     " << price << endl;
+                    found = true;
+                }
+            }
+
+            if (!found)
+            {
+                cout << "Item not found." << endl;
+            }
+            else
+            {
+                break;
+            }
+        }
+        menu.close();
+    }
+
+    vector<usable_menu> sort_menu_pricelowtohigh()
+    {
+        vector<usable_menu> sorted_menu;
+        ifstream menu;
+        menu.open("MENU.txt");
+
+        usable_menu temp;
+        while (menu >> temp.item_id >> temp.item_name >> temp.item_price)
+        {
+            sorted_menu.push_back(temp);
+        }
+
+        sort(sorted_menu.begin(), sorted_menu.end(), [](const usable_menu &a, const usable_menu &b)
+             { return a.item_price < b.item_price; });
+
+        return sorted_menu;
+    }
+
+    vector<usable_menu> sort_menu_pricehightolow()
+    {
+        vector<usable_menu> sorted_menu;
+        ifstream menu;
+        menu.open("MENU.txt");
+
+        usable_menu temp;
+        while (menu >> temp.item_id >> temp.item_name >> temp.item_price)
+        {
+            sorted_menu.push_back(temp);
+        }
+
+        sort(sorted_menu.begin(), sorted_menu.end(), [](const usable_menu &a, const usable_menu &b)
+             { return a.item_price > b.item_price; });
+
+        return sorted_menu;
+    }
 };
 
 // Static int for order num
