@@ -3,36 +3,32 @@
 -------------------------------
     SLAYER'S DEN RESTAURANT    
 -------------------------------
-ORDER NO: 1
-DATE: 23/6/2025
-TIME: 23:24
+ORDER NO: 2
+DATE: 3/7/2025
+TIME: 11:42
 -------------------------------
-EATING LOCATION: DINE IN
+EATING LOCATION: DINE OUT
 -------------------------------
-1)ITEM ID: 2
+1)ITEM ID: 11
+  ITEM NAME: Chole_Bhature
+  ITEM QUANTITY: 2
+  ITEM UNITPRICE: 120
+  ITEM TOTAL: 240
+
+2)ITEM ID: 2
   ITEM NAME: Cold_Coffee
   ITEM QUANTITY: 2
   ITEM UNITPRICE: 60
   ITEM TOTAL: 120
 
-2)ITEM ID: 23
-  ITEM NAME: Vadapav
-  ITEM QUANTITY: 2
-  ITEM UNITPRICE: 20
-  ITEM TOTAL: 40
-
-3)ITEM ID: 1
-  ITEM NAME: Water_Bottle
-  ITEM QUANTITY: 1
-  ITEM UNITPRICE: 20
-  ITEM TOTAL: 20
-
 -------------------------------
-  SUBTOTAL: 180
-  CGST @ 2.5%: 4.5
-  SGST @ 2.5%: 4.5
+  SUBTOTAL: 360
+  CGST @ 2.5%: 9
+  SGST @ 2.5%: 9
 -------------------------------
-  GRAND TOTAL: 189
+  GRAND TOTAL: 378
+-------------------------------
+     THANK YOU VISIT AGAIN     
 -------------------------------
 
 

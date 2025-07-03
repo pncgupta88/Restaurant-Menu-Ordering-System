@@ -238,14 +238,15 @@ public:
                 cout << endl
                      << "SELECT AN OPTION:" << endl;
                 cout << "1)EDIT MENU." << endl
-                     << "2)CLOSE SYSTEM." << endl
+                     << "2)VIEW ALL TIME ORDER HISTORY." << endl
+                     << "3)CLOSE SYSTEM." << endl
                      << endl;
 
                 int inside_settings;
-                cout << "ENTER 1/2: ";
-                while (!(cin >> inside_settings) || (inside_settings != 1 && inside_settings != 2))
+                cout << "ENTER 1/2/3: ";
+                while (!(cin >> inside_settings) || (inside_settings != 1 && inside_settings != 2 && inside_settings != 3 ))
                 {
-                    cout << "INVALID searched_word! ENTER 1/2: ";
+                    cout << "INVALID searched_word! ENTER 1/2/3: ";
                     cin.clear();
                     cin.ignore(10000, '\n');
                 }
@@ -322,9 +323,15 @@ public:
                         return;
                     }
                     // inside_editmenu (Return) => End
-                }
+                }else if (inside_settings == 2)
+                {
+                    cout << endl << "ORDER HISTORY:"<< endl << endl;
+                    view_order_history();
 
-                else if (inside_settings == 2)
+                }
+                
+
+                else if (inside_settings == 3)
                 {
                     cout << endl
                          << "EXITING..." << endl
@@ -1031,7 +1038,7 @@ public:
         return sorted_menu;
     }
 
-    vector<usable_menu> sort_menu_alphabetically()
+    vector<usable_menu> sort_menu_alphabaticalorder()
     {
         vector<usable_menu> sorted_menu;
         ifstream menu;
@@ -1047,6 +1054,19 @@ public:
              { return a.item_name < b.item_name; });
 
         return sorted_menu;
+    } 
+
+    void view_order_history()
+    {
+        ifstream order_history;
+        order_history.open("ORDER.txt");
+
+        string line;
+
+        while (getline(order_history, line))
+        {
+            cout << line <<endl;
+        }        
     }
 };
 
