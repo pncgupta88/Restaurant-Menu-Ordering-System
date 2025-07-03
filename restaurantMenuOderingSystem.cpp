@@ -163,7 +163,7 @@ public:
 
                 cout << item_details.item_id << "    " << item_details.item_name << "     " << item_details.item_price << endl;
             }
-            
+
             char g_OR_y;
             cout << endl
                  << "ENTER g/G TO GIVE ORDER OR r/R TO RETURN TO HOME SCREEN: ";
@@ -186,13 +186,42 @@ public:
                 return;
             }
         }
-        // first_choice (SORT MENU (PRICE HIGH TO LOW).) => Start
+        // first_choice (SORT MENU (PRICE HIGH TO LOW).) => End
 
         else if (first_choice == 5) // first_choice (SORT MENU (ALPHABETICAL ORDER).) => Start
         {
+            vector<usable_menu> sorted_menu = sort_menu_alphabaticalorder();
+            cout << "\n==========SORTED MENU==========\n\n";
+            cout << "Id.  item Name       Price(Rs)" << endl
+                 << endl;
+            for (int i = 0; i < sorted_menu.size(); i++)
+            {
+                const usable_menu &item_details = sorted_menu[i];
+
+                cout << item_details.item_id << "    " << item_details.item_name << "     " << item_details.item_price << endl;
+            }
+
+            char g_OR_y;
             cout << endl
-                 << "WORK IN PROGERSS" << endl;
-            return;
+                 << "ENTER g/G TO GIVE ORDER OR r/R TO RETURN TO HOME SCREEN: ";
+            while (!(cin >> g_OR_y) || (g_OR_y != 'g' && g_OR_y != 'G' && g_OR_y != 'r' && g_OR_y != 'R'))
+            {
+                cout << "INVALID searched_word! ENTER g/G TO GIVE ORDER OR r/R TO RETURN TO HOME SCREEN: ";
+                cin.clear();
+                cin.ignore(10000, '\n');
+            }
+
+            if (g_OR_y == 'g' || g_OR_y == 'G')
+            {
+                cout << endl
+                     << "GIVE YOUR ORDER: " << endl
+                     << endl;
+                take_order();
+            }
+            else
+            {
+                return;
+            }
         }
         // first_choice (SORT MENU (ALPHABETICAL ORDER).) => End
 
@@ -998,6 +1027,24 @@ public:
 
         sort(sorted_menu.begin(), sorted_menu.end(), [](const usable_menu &a, const usable_menu &b)
              { return a.item_price > b.item_price; });
+
+        return sorted_menu;
+    }
+
+    vector<usable_menu> sort_menu_alphabetically()
+    {
+        vector<usable_menu> sorted_menu;
+        ifstream menu;
+        menu.open("MENU.txt");
+
+        usable_menu temp;
+        while (menu >> temp.item_id >> temp.item_name >> temp.item_price)
+        {
+            sorted_menu.push_back(temp);
+        }
+
+        sort(sorted_menu.begin(), sorted_menu.end(), [](const usable_menu &a, const usable_menu &b)
+             { return a.item_name < b.item_name; });
 
         return sorted_menu;
     }
