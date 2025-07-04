@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <ctime> //add current time to your bill
+#include <ctime> 
 #include <climits>
 #include <algorithm>
 #include <cctype>
@@ -304,19 +304,305 @@ public:
 
                     else if (inside_editmenu == 2) // inside_editmenu (Delete Items) => Start
                     {
-                        cout << endl
-                             << "WORK IN PROGERSS" << endl;
+                       display_menu();
+
+                        vector<usable_menu> menu = copymenuitems();
+                        while (true)
+                        {
+                            cout << "\nEnter Item ID: ";
+                            int entered_id_to_delete;
+                            while (!(cin >> entered_id_to_delete))
+                            {
+                                cout << "Invalid Input! Enter Item ID From Menu: ";
+                                cin.clear();
+                                cin.ignore(10000, '\n');
+                            }
+
+                            // checking for valid id
+                            bool valid_orderid = false;
+
+                            // editing in usable_menu
+                            for (int i = 0; i < menu.size(); i++)
+                            {
+                                if (menu[i].item_id == entered_id_to_delete)
+                                {
+                                    cout << "\nItem Found: " << menu[i].item_name;
+
+                                    char confirm;
+                                    cout << "Are You Sure You Want To Delete This Item? (Y/N): ";
+                                    while (!(cin >> confirm) || (confirm != 'Y' && confirm != 'y' && confirm != 'N' && confirm != 'n'))
+                                    {
+                                        cout << "Invalid Input! Enter Y/y OR N/n: ";
+                                        cin.clear();
+                                        cin.ignore(10000, '\n');
+                                    }
+
+                                    if (confirm == 'Y' || confirm == 'y')
+                                    {
+                                        menu.erase(menu.begin() + i);
+                                        cout << "Item Deleted Successfully.\n";
+                                    }
+                                    else
+                                    {
+                                        cout << "Item Not Deleted.\n";
+                                    }
+
+                                    valid_orderid = true;
+                                    break;
+                                }
+                            }
+
+                            if (!valid_orderid)
+                            {
+                                cout << "Invalid Item ID! ";
+                                continue;
+                            }
+
+                            // deleting more than one items
+                            char choice;
+                            cout << "Do You Want To Delete More Items? (Y/N): ";
+                            while (!(cin >> choice) || (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n'))
+                            {
+                                cout << "Invalid Input! Enter Y/y Or N/n: ";
+                                cin.clear();
+                                cin.ignore(10000, '\n');
+                            }
+
+                            if (choice == 'N' || choice == 'n')
+                            {
+                                break;
+                            }
+                        }
+
+                        // deleting in menu
+                        ofstream out("MENU.txt");
+                        for (const auto &item : menu)
+                        {
+                            out << item.item_id << "   " << item.item_name << "        " << item.item_price << endl;
+                        }
+                        out.close();
+
+                        cout << "\nMenu Updated Successfully.\n";
                         return;
                     }
-                    // inside_editmenu (Add Items) => End
+                    // inside_editmenu (Delete Items) => End
 
                     else if (inside_editmenu == 3) // inside_editmenu (Edit Items) => Start
                     {
-                        cout << endl
-                             << "WORK IN PROGERSS" << endl;
+                        display_menu();
+
+                        vector<usable_menu> menu = copymenuitems();
+                        while (true)
+                        {
+                            cout << "Enter Item ID: ";
+                            int entered_id_to_modify;
+                            while (!(cin >> entered_id_to_modify))
+                            {
+                                cout << "Invalid Input! Enter Item ID From Menu: ";
+                                cin.clear();
+                                cin.ignore(10000, '\n');
+                            }
+
+                            // checking for valid id
+                            bool valid_orderid = false;
+                            usable_menu selected_item;
+
+                            for (int i = 0; i < menu.size(); i++)
+                            {
+                                if (menu[i].item_id == entered_id_to_modify)
+                                {
+                                    selected_item = menu[i];
+                                    valid_orderid = true;
+                                    break;
+                                }
+                            }
+
+                            if (!valid_orderid)
+                            {
+                                cout << "Invalid Item ID! ";
+                                continue;
+                            }
+                            // checked for valid id
+
+                            while (true)
+                            {
+                                cout << "\nWhat Do You Want To Edit?" << endl
+                                     << "1. Item ID" << endl
+                                     << "2. Item Name" << endl
+                                     << "3. Item Price" << endl
+                                     << "Enter 1/2/3: ";
+
+                                int edit_data;
+
+                                while (!(cin >> edit_data) || (edit_data != 1 && edit_data != 2 && edit_data != 3))
+                                {
+                                    cout << "Invalid Input! Enter Item ID From Menu: ";
+                                    cin.clear();
+                                    cin.ignore(10000, '\n');
+                                }
+
+                                // editing in usable_menu
+                                for (int i = 0; i < menu.size(); i++)
+                                {
+                                    if (menu[i].item_id == entered_id_to_modify)
+                                    {
+                                        selected_item = menu[i];
+                                        valid_orderid = true;
+                                        break;
+                                    }
+                                }
+
+                                if (!valid_orderid)
+                                {
+                                    cout << "Invalid Item ID! ";
+                                    continue;
+                                }
+
+                                // function for editing id
+                                if (edit_data == 1)
+                                {
+                                    int new_id;
+                                    cout << "\nEnter The New Item ID: ";
+                                    cin >> new_id;
+
+                                    // Check for duplicate
+                                    bool new_valid_id = false;
+
+                                    for (int i = 0; i < menu.size(); i++)
+                                    {
+                                        if (menu[i].item_id == new_id)
+                                        {
+                                            new_valid_id = true;
+                                            break;
+                                        }
+                                    }
+
+                                    if (new_valid_id)
+                                    {
+                                        cout << "Item ID already exists! ";
+                                        continue;
+                                    }
+
+                                    // Assign the new id
+                                    for (int i = 0; i < menu.size(); i++)
+                                    {
+                                        if (menu[i].item_id == entered_id_to_modify)
+                                        {
+                                            menu[i].item_id = new_id;
+                                            cout << "Item Edited Successfully.\n";
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                // function for editing name
+                                else if (edit_data == 2)
+                                {
+                                    string new_name;
+                                    cout << "\nEnter The New Item Name: ";
+                                    cin >> new_name;
+
+                                    // Check for duplicate
+                                    bool name_exists = false;
+                                    for (int i = 0; i < menu.size(); i++)
+                                    {
+                                        if (menu[i].item_name == new_name)
+                                        {
+                                            name_exists = true;
+                                            break;
+                                        }
+                                    }
+
+                                    if (name_exists)
+                                    {
+                                        cout << "Item Name Already Exists! Please Choose A Different Name.\n";
+                                        continue;
+                                    }
+
+                                    // Assign the new name
+                                    for (int i = 0; i < menu.size(); i++)
+                                    {
+                                        if (menu[i].item_id == entered_id_to_modify)
+                                        {
+                                            menu[i].item_name = new_name;
+                                            cout << "Item Edited Successfully.\n";
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                // function for editing price
+                                else if (edit_data == 3)
+                                {
+                                    double new_price;
+                                    cout << "\nEnter The New Item Price: \n";
+                                    cin >> new_price;
+
+                                    for (int i = 0; i < menu.size(); i++)
+                                    {
+                                        if (menu[i].item_id == entered_id_to_modify)
+                                        {
+                                            menu[i].item_price = new_price;
+                                            cout << "Item Edited Successfully.\n";
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                // editing more than one items
+                                char choice;
+                                cout << "\nEdit More Fields Of This Item? (Y/N): ";
+                                while (!(cin >> choice) || (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n'))
+                                {
+                                    cout << "Invalid Input! Enter Y/y Or N/n: ";
+                                    cin.clear();
+                                    cin.ignore(10000, '\n');
+                                }
+
+                                if (choice == 'N' || choice == 'n')
+                                {
+                                    break;
+                                }
+
+                                else
+                                {
+                                    continue;
+                                }
+                            }
+
+                            char edit_another;
+                            cout << "Edit another item? (Y/N): ";
+
+                            while (!(cin >> edit_another) || (edit_another != 'Y' && edit_another != 'y' && edit_another != 'N' && edit_another != 'n'))
+                                {
+                                    cout << "Invalid Input! Enter Y/y Or N/n: ";
+                                    cin.clear();
+                                    cin.ignore(10000, '\n');
+                                }
+
+                                if (edit_another == 'N' || edit_another == 'n')
+                                {
+                                    break;
+                                }
+
+                                else
+                                {
+                                    continue;
+                                }
+                        }
+
+                        // editing in menu
+                        ofstream out("MENU.txt");
+                        for (const auto &item : menu)
+                        {
+                            out << item.item_id << "   " << item.item_name << "        " << item.item_price << endl;
+                        }
+                        out.close();
+
+                        cout << "\nMenu Updated Successfully.\n";
                         return;
                     }
-                    // inside_editmenu (Add Items) => End
+                    // inside_editmenu (Edit Items) => End
 
                     else if (inside_editmenu == 4) // inside_editmenu (Return) => Start
                     {
