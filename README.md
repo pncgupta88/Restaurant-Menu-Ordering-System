@@ -7,7 +7,7 @@ RMOS is a console-based Restaurant Menu Ordering System written in C++. It allow
 Built collaboratively by a team of 3:
 - **Prince Kumar Gupta** 
 - **Tanvi Shekhawat** 
-- **Shiv Yadav**
+- **Shiv Kumar Yadav**
 
 ---
 
