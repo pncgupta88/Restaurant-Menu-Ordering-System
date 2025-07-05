@@ -68,8 +68,49 @@ public:
 
         else if (first_choice == 2) // first_choice (SEARCH ITEM IN MENU AND PLACE ORDER.) => Start
         {
-            cout << endl << "Not implemented yet." << endl << endl;
-            return; 
+            char searchmore = 'Y';
+
+            while (searchmore == 'Y' || searchmore == 'y')
+            {
+                cout << endl;
+                display_menu();
+
+                search_menu_item();
+                cout << endl
+                     << "Do you want to search more items? (Y/N): ";
+
+                while (!(cin >> searchmore) || (searchmore != 'y' && searchmore != 'Y' && searchmore != 'n' && searchmore != 'N'))
+                {
+                    cout << "Invalid input! Do you want to search more items? (Y/N): ";
+                    cin.clear();
+                    cin.ignore(10000, '\n');
+                }
+
+                if (searchmore == 'N' || searchmore == 'n')
+                {
+                    char g_OR_y;
+                    cout << endl
+                         << "Do you want to give order or return to home screen (g/r): ";
+                    while (!(cin >> g_OR_y) || (g_OR_y != 'g' && g_OR_y != 'G' && g_OR_y != 'r' && g_OR_y != 'R'))
+                    {
+                        cout << "Invalid input! Do you want to give order or return to home screen (g/r): ";
+                        cin.clear();
+                        cin.ignore(10000, '\n');
+                    }
+
+                    if (g_OR_y == 'g' || g_OR_y == 'G')
+                    {
+                        cout << endl
+                             << "Give your order: " << endl
+                             << endl;
+                        take_order();
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+            } 
         }
         // first_choice (SEARCH ITEM IN MENU AND PLACE ORDER.) => End
 
@@ -1138,8 +1179,8 @@ public:
     }
     // Take order funcn => End
 
-     // for search itmes by name .
-    void search_menu_item()
+    // Search items by name
+    void search_menu_item() // Search menu item funcn => Start
     {
         ifstream menu;
         menu.open("MENU.txt");
@@ -1227,7 +1268,6 @@ public:
         menu.close();
     }
     // Search menu item funcn => End
-
 
     // Function to sort menu items by price low to high
     vector<usable_menu> sort_menu_pricelowtohigh() // sort_menu_pricelowtohigh funcn => Start
