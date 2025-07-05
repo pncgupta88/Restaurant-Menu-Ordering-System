@@ -86,7 +86,7 @@ and Visit [GitHub](https://github.com/pncgupta88) to explore more projects!
 on [LinkedIn](https://www.linkedin.com/in/yourprofile) 
 and Visit [GitHub](https://github.com/yourusername) to explore more projects!
 - Connect with Shiv Yadav
-on [LinkedIn](https://www.linkedin.com/in/yourprofile) 
-and Visit [GitHub](https://github.com/yourusername) to explore more projects!
+on [LinkedIn](https://www.linkedin.com/in/shiv-kumar-yadav77/) 
+and Visit [GitHub](https://github.com/Shiv77yadav) to explore more projects!
 
 ---
