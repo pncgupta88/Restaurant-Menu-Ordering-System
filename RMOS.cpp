@@ -931,11 +931,11 @@ public:
         time_t now = time(0);
         tm *localTime = localtime(&now);
 
-        string entered_eating_location;
-        cout << "Enter eating location (in/out): ";
-        while (!(cin >> entered_eating_location) || (entered_eating_location != "IN" && entered_eating_location != "in" && entered_eating_location != "OUT" && entered_eating_location != "out"))
+        string eating_location;
+        cout << "Enter eating location (In/Out): ";
+        while (!(cin >> eating_location) || (eating_location != "IN" && eating_location != "in" && eating_location != "OUT" && eating_location != "out"))
         {
-            cout << "Invalid eating location! Enter eating location (in/out): ";
+            cout << "Invalid eating location! Enter eating location (In/Out): ";
             cin.clear();
             cin.ignore(10000, '\n');
         }
