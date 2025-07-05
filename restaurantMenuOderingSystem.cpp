@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <ctime>
+#include <ctime> 
 #include <climits>
 #include <algorithm>
 #include <cctype>
@@ -23,19 +23,19 @@ public:
         cout << endl;
         cout << "|| WELCOME TO RESTAURANT MENU ORDERING SYSTEM ||" << endl
              << endl;
-        cout << "CHOOSE AN OPTION:" << endl
-             << "1) VIEW MENU AND PLACE ORDER." << endl
-             << "2) SEARCH ITEM IN MENU." << endl
-             << "3) SORT MENU (PRICE LOW TO HIGH)." << endl
-             << "4) SORT MENU (PRICE HIGH TO LOW)." << endl
-             << "5) SORT MENU (ALPHABETICAL ORDER)." << endl
-             << "6) SETTINGS." << endl
+        cout << "Choose an option:" << endl
+             << "1) View menu and place order." << endl
+             << "2) Search item in menu." << endl
+             << "3) Sort menu (price low to high)." << endl
+             << "4) Sort menu (price high to low)." << endl
+             << "5) Sort menu (alphabetical order)." << endl
+             << "6) Settings." << endl
              << endl;
-        cout << "ENTER 1/2/3/4/5/6: ";
+        cout << "Enter 1/2/3/4/5/6: ";
 
         while (!(cin >> first_choice) || (first_choice != 1 && first_choice != 2 && first_choice != 3 && first_choice != 4 && first_choice != 5 && first_choice != 6))
         {
-            cout << "INVALID searched_word! ENTER 1/2/3: ";
+            cout << "INVALID INPUT! ENTER 1/2/3/4/5/6: ";
             cin.clear();
             cin.ignore(10000, '\n');
         }
@@ -44,10 +44,10 @@ public:
         {
             display_menu();
             char g_OR_y;
-            cout << "ENTER g/G TO GIVE ORDER OR r/R TO RETURN TO HOME SCREEN: ";
+            cout << "Do you want to give order or return to home screen (g/r): ";
             while (!(cin >> g_OR_y) || (g_OR_y != 'g' && g_OR_y != 'G' && g_OR_y != 'r' && g_OR_y != 'R'))
             {
-                cout << "INVALID searched_word! ENTER g/G TO GIVE ORDER OR r/R TO RETURN TO HOME SCREEN: ";
+                cout << "Invalid input! Do you want to give order or return to home screen (g/r): ";
                 cin.clear();
                 cin.ignore(10000, '\n');
             }
@@ -55,7 +55,7 @@ public:
             if (g_OR_y == 'g' || g_OR_y == 'G')
             {
                 cout << endl
-                     << "GIVE YOUR ORDER: " << endl
+                     << "Give your order: " << endl
                      << endl;
                 take_order();
             }
@@ -68,49 +68,8 @@ public:
 
         else if (first_choice == 2) // first_choice (SEARCH ITEM IN MENU AND PLACE ORDER.) => Start
         {
-            char searchmore = 'Y';
-
-            while (searchmore == 'Y' || searchmore == 'y')
-            {
-                cout << endl;
-                display_menu();
-
-                search_menu_item();
-                cout << endl
-                     << "DO YOU WANT TO SEARCH MORE ITEMS. ENTER Y FOR 'YES' OR N FOR 'NO': ";
-
-                while (!(cin >> searchmore) || (searchmore != 'y' && searchmore != 'Y' && searchmore != 'n' && searchmore != 'N'))
-                {
-                    cout << "INVALID INPUT! ENTER Y/y FOR 'YES' OR N/n FOR 'NO': ";
-                    cin.clear();
-                    cin.ignore(10000, '\n');
-                }
-
-                if (searchmore == 'N' || searchmore == 'n')
-                {
-                    char g_OR_y;
-                    cout << endl
-                         << "ENTER g/G TO GIVE ORDER OR r/R TO RETURN TO HOME SCREEN: ";
-                    while (!(cin >> g_OR_y) || (g_OR_y != 'g' && g_OR_y != 'G' && g_OR_y != 'r' && g_OR_y != 'R'))
-                    {
-                        cout << "INVALID searched_word! ENTER g/G TO GIVE ORDER OR r/R TO RETURN TO HOME SCREEN: ";
-                        cin.clear();
-                        cin.ignore(10000, '\n');
-                    }
-
-                    if (g_OR_y == 'g' || g_OR_y == 'G')
-                    {
-                        cout << endl
-                             << "GIVE YOUR ORDER: " << endl
-                             << endl;
-                        take_order();
-                    }
-                    else
-                    {
-                        return;
-                    }
-                }
-            }
+               cout << "Not implemented yet." << endl;
+               return;
         }
         // first_choice (SEARCH ITEM IN MENU AND PLACE ORDER.) => End
 
@@ -129,10 +88,10 @@ public:
 
             char g_OR_y;
             cout << endl
-                 << "ENTER g/G TO GIVE ORDER OR r/R TO RETURN TO HOME SCREEN: ";
+                 << "Do you want to give order or return to home screen (g/r): ";
             while (!(cin >> g_OR_y) || (g_OR_y != 'g' && g_OR_y != 'G' && g_OR_y != 'r' && g_OR_y != 'R'))
             {
-                cout << "INVALID searched_word! ENTER g/G TO GIVE ORDER OR r/R TO RETURN TO HOME SCREEN: ";
+                cout << "Invalid input! Do you want to give order or return to home screen (g/r): ";
                 cin.clear();
                 cin.ignore(10000, '\n');
             }
@@ -140,7 +99,7 @@ public:
             if (g_OR_y == 'g' || g_OR_y == 'G')
             {
                 cout << endl
-                     << "GIVE YOUR ORDER: " << endl
+                     << "Give your order: " << endl
                      << endl;
                 take_order();
             }
@@ -166,10 +125,10 @@ public:
 
             char g_OR_y;
             cout << endl
-                 << "ENTER g/G TO GIVE ORDER OR r/R TO RETURN TO HOME SCREEN: ";
+                 << "Do you want to give order or return to home screen (g/r): ";
             while (!(cin >> g_OR_y) || (g_OR_y != 'g' && g_OR_y != 'G' && g_OR_y != 'r' && g_OR_y != 'R'))
             {
-                cout << "INVALID searched_word! ENTER g/G TO GIVE ORDER OR r/R TO RETURN TO HOME SCREEN: ";
+                cout << "Invalid input! Do you want to give order or return to home screen (g/r): ";
                 cin.clear();
                 cin.ignore(10000, '\n');
             }
@@ -177,7 +136,7 @@ public:
             if (g_OR_y == 'g' || g_OR_y == 'G')
             {
                 cout << endl
-                     << "GIVE YOUR ORDER: " << endl
+                     << "Give your order: " << endl
                      << endl;
                 take_order();
             }
@@ -203,10 +162,10 @@ public:
 
             char g_OR_y;
             cout << endl
-                 << "ENTER g/G TO GIVE ORDER OR r/R TO RETURN TO HOME SCREEN: ";
+                 << "Do you want to give order or return to home screen (g/r): ";
             while (!(cin >> g_OR_y) || (g_OR_y != 'g' && g_OR_y != 'G' && g_OR_y != 'r' && g_OR_y != 'R'))
             {
-                cout << "INVALID searched_word! ENTER g/G TO GIVE ORDER OR r/R TO RETURN TO HOME SCREEN: ";
+                cout << "Invalid input! Do you want to give order or return to home screen (g/r): ";
                 cin.clear();
                 cin.ignore(10000, '\n');
             }
@@ -214,7 +173,7 @@ public:
             if (g_OR_y == 'g' || g_OR_y == 'G')
             {
                 cout << endl
-                     << "GIVE YOUR ORDER: " << endl
+                     << "Give your order: " << endl
                      << endl;
                 take_order();
             }
@@ -234,37 +193,37 @@ public:
             else
             {
                 cout << endl
-                     << "CORRECT SECURITY PASS. YOU CAN ACCESS THIS FEATURE." << endl;
+                     << "Correct security pass. You can access this feature." << endl;
                 cout << endl
-                     << "SELECT AN OPTION:" << endl;
-                cout << "1)EDIT MENU." << endl
-                     << "2)VIEW ALL TIME ORDER HISTORY." << endl
-                     << "3)CLOSE SYSTEM." << endl
+                     << "Select an option:" << endl;
+                cout << "1) Edit Menu." << endl
+                     << "2) View All Time Order History." << endl
+                     << "3) Close System." << endl
                      << endl;
 
                 int inside_settings;
-                cout << "ENTER 1/2/3: ";
+                cout << "Enter 1/2/3: ";
                 while (!(cin >> inside_settings) || (inside_settings != 1 && inside_settings != 2 && inside_settings != 3 ))
                 {
-                    cout << "INVALID searched_word! ENTER 1/2/3: ";
+                    cout << "Invalid input! Enter 1/2/3: ";
                     cin.clear();
                     cin.ignore(10000, '\n');
                 }
 
-                if (inside_settings == 1)
+                if (inside_settings == 1) // inside_settings (Edit Menu) => Start
                 {
                     cout << endl
-                         << "SELECT WHAT YOU WANT TO EDIT IN MENU:" << endl;
-                    cout << "1) ADD ITEMS." << endl;
-                    cout << "2) DELETE ITEMS.(INCOMPLETE! NOT WORKING)" << endl;
-                    cout << "3) EDIT ITEMS.(INCOMPLETE! NOT WORKING)" << endl;
-                    cout << "4) RETURN." << endl
+                         << "Select what you want to edit in menu:" << endl;
+                    cout << "1) Add Items." << endl;
+                    cout << "2) Delete Items." << endl;
+                    cout << "3) Edit Items." << endl;
+                    cout << "4) Return." << endl
                          << endl;
-                    cout << "ENTER 1/2/3/4: ";
+                    cout << "Enter 1/2/3/4: ";
 
                     while (!(cin >> inside_editmenu) || (inside_editmenu != 1 && inside_editmenu != 2 && inside_editmenu != 3 && inside_editmenu != 4)) //))
                     {
-                        cout << "INVALID searched_word! ENTER 1/2/3/4: ";
+                        cout << "Invalid input! Enter 1/2/3/4: ";
                         cin.clear();
                         cin.ignore(10000, '\n');
                     }
@@ -276,17 +235,17 @@ public:
                         while (addmore == 'Y' || addmore == 'y')
                         {
                             cout << endl
-                                 << "ENTER NEW ITEM DETAILS." << endl;
+                                 << "Enter new item details." << endl;
                             ;
                             add_newitem();
                             cout << endl
-                                 << "SUCESSFULLY ADDED NEW ITEM TO MENU." << endl
+                                 << "Successfully added new item to menu." << endl
                                  << endl;
 
-                            cout << "DO YOU WANT TO ADD MORE ITEMS. ENTER Y FOR 'YES' OR N FOR 'NO': ";
+                            cout << "Do you want to add more items? (Y/N): ";
                             while (!(cin >> addmore) || (addmore != 'y' && addmore != 'Y' && addmore != 'n' && addmore != 'N'))
                             {
-                                cout << "INVALID searched_word! ENTER Y/y FOR 'YES' OR N/n FOR 'NO': ";
+                                cout << "Invalid input! Do you want to add more items? (Y/N): ";
                                 cin.clear();
                                 cin.ignore(10000, '\n');
                             }
@@ -294,7 +253,7 @@ public:
                             if (addmore == 'N' || addmore == 'n')
                             {
                                 cout << endl
-                                     << "THANK YOU! FOR USING OUR SYSTEM. VISIT AGAIN BYII..." << endl
+                                     << "Thank you for using our system. Visit again soon!" << endl
                                      << endl;
                             }
                         }
@@ -304,19 +263,307 @@ public:
 
                     else if (inside_editmenu == 2) // inside_editmenu (Delete Items) => Start
                     {
-                        cout << endl
-                             << "WORK IN PROGERSS" << endl;
+                       display_menu();
+
+                        vector<usable_menu> menu = copymenuitems();
+                        while (true)
+                        {
+                            cout << "\nEnter Item ID: ";
+                            int entered_id_to_delete;
+                            while (!(cin >> entered_id_to_delete))
+                            {
+                                cout << "Invalid Input! Enter Item ID From Menu: ";
+                                cin.clear();
+                                cin.ignore(10000, '\n');
+                            }
+
+                            // checking for valid id
+                            bool valid_orderid = false;
+
+                            // editing in usable_menu
+                            for (int i = 0; i < menu.size(); i++)
+                            {
+                                if (menu[i].item_id == entered_id_to_delete)
+                                {
+                                    cout << "\nItem Found: " << menu[i].item_name;
+
+                                    char confirm;
+                                    cout << "Are You Sure You Want To Delete This Item? (Y/N): ";
+                                    while (!(cin >> confirm) || (confirm != 'Y' && confirm != 'y' && confirm != 'N' && confirm != 'n'))
+                                    {
+                                        cout << "Invalid Input! Enter Y/y OR N/n: ";
+                                        cin.clear();
+                                        cin.ignore(10000, '\n');
+                                    }
+
+                                    if (confirm == 'Y' || confirm == 'y')
+                                    {
+                                        menu.erase(menu.begin() + i);
+                                        cout << "Item Deleted Successfully.\n";
+                                    }
+                                    else
+                                    {
+                                        cout << "Item Not Deleted.\n";
+                                    }
+
+                                    valid_orderid = true;
+                                    break;
+                                }
+                            }
+
+                            if (!valid_orderid)
+                            {
+                                cout << "Invalid Item ID! ";
+                                continue;
+                            }
+
+                            // deleting more than one items
+                            char choice;
+                            cout << "Do You Want To Delete More Items? (Y/N): ";
+                            while (!(cin >> choice) || (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n'))
+                            {
+                                cout << "Invalid Input! Enter Y/y Or N/n: ";
+                                cin.clear();
+                                cin.ignore(10000, '\n');
+                            }
+
+                            if (choice == 'N' || choice == 'n')
+                            {
+                                break;
+                            }
+                        }
+
+                        // deleting in menu
+                        ofstream out;
+                        out.open("MENU.txt");
+                        for (const auto &item : menu)
+                        {
+                            out << item.item_id << "   " << item.item_name << "        " << item.item_price << endl;
+                        }
+                        out.close();
+
+                        cout << "\nMenu Updated Successfully.\n";
                         return;
                     }
-                    // inside_editmenu (Add Items) => End
+                    // inside_editmenu (Delete Items) => End
 
                     else if (inside_editmenu == 3) // inside_editmenu (Edit Items) => Start
                     {
-                        cout << endl
-                             << "WORK IN PROGERSS" << endl;
+                        display_menu();
+
+                        vector<usable_menu> menu = copymenuitems();
+                        while (true)
+                        {
+                            cout << "Enter Item ID: ";
+                            int entered_id_to_modify;
+                            while (!(cin >> entered_id_to_modify))
+                            {
+                                cout << "Invalid Input! Enter Item ID From Menu: ";
+                                cin.clear();
+                                cin.ignore(10000, '\n');
+                            }
+
+                            // checking for valid id
+                            bool valid_orderid = false;
+                            usable_menu selected_item;
+
+                            for (int i = 0; i < menu.size(); i++)
+                            {
+                                if (menu[i].item_id == entered_id_to_modify)
+                                {
+                                    selected_item = menu[i];
+                                    valid_orderid = true;
+                                    break;
+                                }
+                            }
+
+                            if (!valid_orderid)
+                            {
+                                cout << "Invalid Item ID! ";
+                                continue;
+                            }
+                            // checked for valid id
+
+                            while (true)
+                            {
+                                cout << "\nWhat Do You Want To Edit?" << endl
+                                     << "1. Item ID" << endl
+                                     << "2. Item Name" << endl
+                                     << "3. Item Price" << endl
+                                     << "Enter 1/2/3: ";
+
+                                int edit_data;
+
+                                while (!(cin >> edit_data) || (edit_data != 1 && edit_data != 2 && edit_data != 3))
+                                {
+                                    cout << "Invalid Input! Enter Item ID From Menu: ";
+                                    cin.clear();
+                                    cin.ignore(10000, '\n');
+                                }
+
+                                // editing in usable_menu
+                                for (int i = 0; i < menu.size(); i++)
+                                {
+                                    if (menu[i].item_id == entered_id_to_modify)
+                                    {
+                                        selected_item = menu[i];
+                                        valid_orderid = true;
+                                        break;
+                                    }
+                                }
+
+                                if (!valid_orderid)
+                                {
+                                    cout << "Invalid Item ID! ";
+                                    continue;
+                                }
+
+                                // function for editing id
+                                if (edit_data == 1)
+                                {
+                                    int new_id;
+                                    cout << "\nEnter The New Item ID: ";
+                                    cin >> new_id;
+
+                                    // Check for duplicate
+                                    bool new_valid_id = false;
+
+                                    for (int i = 0; i < menu.size(); i++)
+                                    {
+                                        if (menu[i].item_id == new_id)
+                                        {
+                                            new_valid_id = true;
+                                            break;
+                                        }
+                                    }
+
+                                    if (new_valid_id)
+                                    {
+                                        cout << "Item ID already exists! ";
+                                        continue;
+                                    }
+
+                                    // Assign the new id
+                                    for (int i = 0; i < menu.size(); i++)
+                                    {
+                                        if (menu[i].item_id == entered_id_to_modify)
+                                        {
+                                            menu[i].item_id = new_id;
+                                            cout << "Item Edited Successfully.\n";
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                // function for editing name
+                                else if (edit_data == 2)
+                                {
+                                    string new_name;
+                                    cout << "\nEnter The New Item Name: ";
+                                    cin >> new_name;
+
+                                    // Check for duplicate
+                                    bool name_exists = false;
+                                    for (int i = 0; i < menu.size(); i++)
+                                    {
+                                        if (menu[i].item_name == new_name)
+                                        {
+                                            name_exists = true;
+                                            break;
+                                        }
+                                    }
+
+                                    if (name_exists)
+                                    {
+                                        cout << "Item Name Already Exists! Please Choose A Different Name.\n";
+                                        continue;
+                                    }
+
+                                    // Assign the new name
+                                    for (int i = 0; i < menu.size(); i++)
+                                    {
+                                        if (menu[i].item_id == entered_id_to_modify)
+                                        {
+                                            menu[i].item_name = new_name;
+                                            cout << "Item Edited Successfully.\n";
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                // function for editing price
+                                else if (edit_data == 3)
+                                {
+                                    double new_price;
+                                    cout << "\nEnter The New Item Price: \n";
+                                    cin >> new_price;
+
+                                    for (int i = 0; i < menu.size(); i++)
+                                    {
+                                        if (menu[i].item_id == entered_id_to_modify)
+                                        {
+                                            menu[i].item_price = new_price;
+                                            cout << "Item Edited Successfully.\n";
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                // editing more than one items
+                                char choice;
+                                cout << "\nEdit More Fields Of This Item? (Y/N): ";
+                                while (!(cin >> choice) || (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n'))
+                                {
+                                    cout << "Invalid Input! Enter Y/y Or N/n: ";
+                                    cin.clear();
+                                    cin.ignore(10000, '\n');
+                                }
+
+                                if (choice == 'N' || choice == 'n')
+                                {
+                                    break;
+                                }
+
+                                else
+                                {
+                                    continue;
+                                }
+                            }
+
+                            char edit_another;
+                            cout << "Edit another item? (Y/N): ";
+
+                            while (!(cin >> edit_another) || (edit_another != 'Y' && edit_another != 'y' && edit_another != 'N' && edit_another != 'n'))
+                                {
+                                    cout << "Invalid Input! Enter Y/y Or N/n: ";
+                                    cin.clear();
+                                    cin.ignore(10000, '\n');
+                                }
+
+                                if (edit_another == 'N' || edit_another == 'n')
+                                {
+                                    break;
+                                }
+
+                                else
+                                {
+                                    continue;
+                                }
+                        }
+
+                        // editing in menu
+                        ofstream out;
+                        out.open("MENU.txt");
+                        for (const auto &item : menu)
+                        {
+                            out << item.item_id << "   " << item.item_name << "        " << item.item_price << endl;
+                        }
+                        out.close();
+
+                        cout << "\nMenu Updated Successfully.\n";
                         return;
                     }
-                    // inside_editmenu (Add Items) => End
+                    // inside_editmenu (Edit Items) => End
 
                     else if (inside_editmenu == 4) // inside_editmenu (Return) => Start
                     {
@@ -325,7 +572,7 @@ public:
                     // inside_editmenu (Return) => End
                 }else if (inside_settings == 2)
                 {
-                    cout << endl << "ORDER HISTORY:"<< endl << endl;
+                    cout << endl << "Order History:" << endl << endl;
                     view_order_history();
 
                 }
@@ -334,7 +581,7 @@ public:
                 else if (inside_settings == 3)
                 {
                     cout << endl
-                         << "EXITING..." << endl
+                         << "Exiting..." << endl
                          << endl;
                     exit(0);
                 }
@@ -353,7 +600,7 @@ public:
         int attempt = 1;
 
         cout << endl
-             << "ENTER SECURITY PASS TO ACCESS THIS FEATURE (ATTEMPT-" << attempt << " OF 3): ";
+             << "Enter security pass to access this feature (Attempt-" << attempt << " of 3): ";
         while (!(cin >> entered_pass) || (entered_pass != security_pass))
         {
             cin.clear();
@@ -363,28 +610,22 @@ public:
             if (attempt > 3)
             {
                 cout << endl
-                     << "ATTEMPTS OVER.";
+                     << "Attempts over.";
                 return false;
             }
 
-            cout << "INCORRECT SECURITY PASS! ENTER CORRECT SECURITY PASS TO ACCESS THIS FEATURE (ATTEMPT-" << attempt << " OF 3): ";
+            cout << "Incorrect security pass! Enter correct security pass to access this feature (Attempt-" << attempt << " of 3): ";
         }
 
         return true;
     }
-    // Secutity check funcn => End
+    // Security check funcn => End
 
     // Function that auto assign item id to newly added item.
     int auto_assign_new_itemID() // Auto assign new item id funcn => Start
     {
         ifstream menu;
         menu.open("MENU.txt");
-
-        // if (!menu)
-        // {
-        //     cout << "MENU FILE IS MISSING." << endl;
-        //     return;
-        // }
 
         int id;
         int max_id = 0;
@@ -485,21 +726,21 @@ public:
         string entered_new_itemname;
         double new_itemprice;
 
-        cout << "SYSTEM WILL ASSIGN ID TO NEW ITEM AUTOMATICALLY " << endl
+        cout << "System will assign ID to new item automatically." << endl
              << endl;
 
         // cin.ignore(1000000, '\n');
 
         while (true)
         {
-            cout << "ENTER NEW ITEM'S NAME (ONLY LETTERS AND SPACES ARE ALLOWED): ";
+            cout << "Enter new item's name (only alphabets and underscores are allowed): ";
             // cin.ignore(1000000, '\n');
             // cin.clear();
             getline(cin, entered_new_itemname);
 
             if (entered_new_itemname.empty())
             {
-                cout << "INVALID ITEMNAME! NAME CANNOT BE BLANK.\n\n";
+                cout << "Invalid item name! Name cannot be blank.\n\n";
                 continue;
             }
 
@@ -516,14 +757,14 @@ public:
 
             if (!valid_itemname)
             {
-                cout << "INVALID ITEMNAME! ";
+                cout << "Invalid item name! ";
                 continue;
             }
 
             if (check_duplicate_menu_items(entered_new_itemname))
             {
                 cout << endl
-                     << "ITEM ALREADY EXISTS IN MENU!" << endl
+                     << "Item already exists in menu!" << endl
                      << endl;
             }
             else
@@ -534,11 +775,11 @@ public:
 
         string new_itemname = final_menu_itemname(entered_new_itemname);
 
-        cout << "ENTER NEW ITEM'S PRICE: ";
+        cout << "Enter new item's price: ";
 
         while (!(cin >> new_itemprice))
         {
-            cout << "INVALID searched_word! ENTER NEW ITEM'S PRICE: ";
+            cout << "Invalid price! Enter new item's price: ";
             cin.clear();
             cin.ignore(10000, '\n');
         }
@@ -548,22 +789,11 @@ public:
     }
     // Add new item funcn => End
 
-    // void delete_item()
-    // {
-
-    // }
-
     // Function to display menu.
     void display_menu() // Display Menu funcn => Start
     {
         ifstream item_menu;
         item_menu.open("MENU.txt");
-
-        if (!item_menu)
-        {
-            cout << "MENU FILE IS MISSING." << endl;
-            return;
-        }
 
         cout << "\n=============MENU=============\n\n";
         cout << "Id.  item Name       Price(Rs)" << endl
@@ -661,10 +891,10 @@ public:
         tm *localTime = localtime(&now);
 
         string eating_location;
-        cout << "ENTER EATING LOCATION. ENTER 'IN' FOR EAT IN OR 'OUT' FOR EAT OUT: ";
+        cout << "Enter eating location (In/Out): ";
         while (!(cin >> eating_location) || (eating_location != "IN" && eating_location != "in" && eating_location != "OUT" && eating_location != "out"))
         {
-            cout << "INVALID! EATING LOCATION.ENTER 'IN' FOR EAT IN OR 'OUT' FOR EAT OUT: ";
+            cout << "Invalid eating location! Enter eating location (In/Out): ";
             cin.clear();
             cin.ignore(10000, '\n');
         }
@@ -673,11 +903,11 @@ public:
 
         while (order_more == 'Y' || order_more == 'y')
         {
-            cout << "ENTER ITEM ID: ";
+            cout << "Enter item ID: ";
             int entered_id;
             while (!(cin >> entered_id))
             {
-                cout << "INVALID searched_word! ENTER ITEM ID FROM MENU: ";
+                cout << "Invalid item ID! Enter item ID from menu: ";
                 cin.clear();
                 cin.ignore(10000, '\n');
             }
@@ -696,17 +926,17 @@ public:
             }
             if (!valid_orderid)
             {
-                cout << "INVALID ITEM ID! ";
+                cout << "Invalid item ID! ";
                 continue;
             }
 
             cin.ignore(10000, '\n');
 
             int qty;
-            cout << "ENTER QUANTITY OF " << selected_item.item_name << " : ";
+            cout << "Enter quantity of " << selected_item.item_name << " : ";
             while (!(cin >> qty) || qty < 0)
             {
-                cout << "INVALID searched_word! ENTER QUANTITY OF " << selected_item.item_name << " : ";
+                cout << "Invalid quantity! Enter quantity of " << selected_item.item_name << " : ";
                 cin.clear();
                 cin.ignore(10000, '\n');
             }
@@ -723,10 +953,10 @@ public:
             order_details.push_back(order);
 
             cout << endl
-                 << "DO YOU WANT TO ADD MORE ITEMS. ENTER Y/y FOR 'YES' OR N/n FOR 'NO': ";
+                 << "Do you want to add more items? (y/n): ";
             while (!(cin >> order_more) || (order_more != 'Y' && order_more != 'y' && order_more != 'N' && order_more != 'n'))
             {
-                cout << "INVALID searched_word! ENTER Y/y FOR 'YES' OR N/n FOR 'NO': ";
+                cout << "Invalid input! Do you want to add more items? (y/n): ";
                 cin.clear();
                 cin.ignore(10000, '\n');
             }
@@ -735,12 +965,12 @@ public:
 
             if (order_more == 'N' || order_more == 'n')
             {
-                cout << "ITEMS IS/ARE SUCESSFULLY ADDED. ENTER P/p TO PLACE ORDER OR C/c TO CANCEL THE ORDER: ";
+                cout << "Items added successfully. Do you want to confirm your order? (p to place order, c to cancel): ";
 
                 char final_confirmation;
                 while (!(cin >> final_confirmation) || (final_confirmation != 'P' && final_confirmation != 'p' && final_confirmation != 'C' && final_confirmation != 'c'))
                 {
-                    cout << "INVALID searched_word! ENTER P/p TO PLACE ORDER OR C/c TO CANCEL THE ORDER: ";
+                    cout << "Invalid input! Do you want to confirm your order? (p to place order, c to cancel): ";
                     cin.clear();
                     cin.ignore(10000, '\n');
                 }
@@ -751,7 +981,7 @@ public:
                     merge_duplicate_order_items(order_details);
 
                     cout << endl
-                         << "YOUR ORDER IS SUCESSFULLY PLACED! PLEASE WAIT A MOMENT, YOUR ORDER IS BEING PREPARED..." << endl
+                         << "Your order is successfully placed! Please wait a moment, your order is being prepared..." << endl
                          << endl;
 
                     cout << "-------------------------------" << endl;
@@ -759,27 +989,27 @@ public:
                     cout << "-------------------------------" << endl;
                     cout << "    SLAYER'S DEN RESTAURANT    " << endl;
                     cout << "-------------------------------" << endl;
-                    cout << "ORDER NO: " << order_no << endl;
-                    cout << "DATE: " << (localTime->tm_mday) << "/"
+                    cout << "Order No: " << order_no << endl;
+                    cout << "Date: " << (localTime->tm_mday) << "/"
                          << (localTime->tm_mon + 1) << "/"
                          << (1900 + localTime->tm_year) << endl;
-                    cout << "TIME: " << (localTime->tm_hour) << ":"
+                    cout << "Time: " << (localTime->tm_hour) << ":"
                          << (localTime->tm_min < 10 ? "0" : "") << localTime->tm_min << endl;
                     cout << "-------------------------------" << endl;
-                    cout << "EATING LOCATION: DINE " << eating_location << endl;
+                    cout << "Eating Location: Dine " << eating_location << endl;
                     cout << "-------------------------------" << endl;
                     for (int i = 0; i < order_details.size(); i++)
                     {
-                        cout << i + 1 << ")ITEM ID: " << order_details[i].save_id << endl;
-                        cout << "  ITEM NAME: " << order_details[i].save_name << endl;
-                        cout << "  ITEM QUANTITY: " << order_details[i].save_qty << endl;
-                        cout << "  ITEM UNIT PRICE: " << order_details[i].save_unitprice << endl;
-                        cout << "  ITEM TOTAL: " << order_details[i].save_itemtotal << endl
+                        cout << i + 1 << ")Item ID: " << order_details[i].save_id << endl;
+                        cout << "  Item Name: " << order_details[i].save_name << endl;
+                        cout << "  Item Quantity: " << order_details[i].save_qty << endl;
+                        cout << "  Item Unit Price: " << order_details[i].save_unitprice << endl;
+                        cout << "  Item Total: " << order_details[i].save_itemtotal << endl
                              << endl;
                     }
 
                     cout << "-------------------------------" << endl;
-                    cout << "  SUBTOTAL: " << subtotal << endl;
+                    cout << "  Subtotal: " << subtotal << endl;
                     cout << "  CGST @ 2.5%: " << (2.5 / 100) * subtotal << endl;
                     cout << "  SGST @ 2.5%: " << (2.5 / 100) * subtotal << endl;
 
@@ -787,7 +1017,7 @@ public:
 
                     total += subtotal + ((2.5 / 100) * subtotal) * 2;
 
-                    cout << "  GRAND TOTAL: " << total << endl;
+                    cout << "  Grand Total: " << total << endl;
                     cout << "-------------------------------" << endl;
                     cout << "     THANK YOU VISIT AGAIN     " << endl;
                     cout << "-------------------------------" << endl
@@ -808,32 +1038,32 @@ public:
                     receiptout << "-------------------------------" << endl;
                     receiptout << "    SLAYER'S DEN RESTAURANT    " << endl;
                     receiptout << "-------------------------------" << endl;
-                    receiptout << "ORDER NO: " << order_no << endl;
-                    receiptout << "DATE: " << (localTime->tm_mday) << "/"
+                    receiptout << "Order No: " << order_no << endl;
+                    receiptout << "Date: " << (localTime->tm_mday) << "/"
                                << (localTime->tm_mon + 1) << "/"
                                << (1900 + localTime->tm_year) << endl;
-                    receiptout << "TIME: " << (localTime->tm_hour) << ":"
+                    receiptout << "Time: " << (localTime->tm_hour) << ":"
                                << (localTime->tm_min < 10 ? "0" : "") << localTime->tm_min << endl;
                     receiptout << "-------------------------------" << endl;
-                    receiptout << "EATING LOCATION: DINE " << eating_location << endl;
+                    receiptout << "Eating Location: Dine " << eating_location << endl;
                     receiptout << "-------------------------------" << endl;
 
                     for (int i = 0; i < order_details.size(); i++)
                     {
-                        receiptout << i + 1 << ")ITEM ID: " << order_details[i].save_id << endl
-                                   << "  ITEM NAME: " << order_details[i].save_name << endl
-                                   << "  ITEM QUANTITY: " << order_details[i].save_qty << endl
-                                   << "  ITEM UNITPRICE: " << order_details[i].save_unitprice << endl
-                                   << "  ITEM TOTAL: " << order_details[i].save_itemtotal << endl
+                        receiptout << i + 1 << ")Item ID: " << order_details[i].save_id << endl
+                                   << "  Item Name: " << order_details[i].save_name << endl
+                                   << "  Item Quantity: " << order_details[i].save_qty << endl
+                                   << "  Item Unit Price: " << order_details[i].save_unitprice << endl
+                                   << "  Item Total: " << order_details[i].save_itemtotal << endl
                                    << endl;
                     }
 
                     receiptout << "-------------------------------" << endl;
-                    receiptout << "  SUBTOTAL: " << subtotal << endl;
+                    receiptout << "  Subtotal: " << subtotal << endl;
                     receiptout << "  CGST @ 2.5%: " << (2.5 / 100) * subtotal << endl;
                     receiptout << "  SGST @ 2.5%: " << (2.5 / 100) * subtotal << endl;
                     receiptout << "-------------------------------" << endl;
-                    receiptout << "  GRAND TOTAL: " << total << endl;
+                    receiptout << "  Grand Total: " << total << endl;
                     receiptout << "-------------------------------" << endl;
                     receiptout << "     THANK YOU VISIT AGAIN     " << endl;
                     receiptout << "-------------------------------" << endl
@@ -856,32 +1086,32 @@ public:
                     orderout << "-------------------------------" << endl;
                     orderout << "    SLAYER'S DEN RESTAURANT    " << endl;
                     orderout << "-------------------------------" << endl;
-                    orderout << "ORDER NO: " << order_no << endl;
-                    orderout << "DATE: " << (localTime->tm_mday) << "/"
+                    orderout << "Order No: " << order_no << endl;
+                    orderout << "Date: " << (localTime->tm_mday) << "/"
                              << (localTime->tm_mon + 1) << "/"
                              << (1900 + localTime->tm_year) << endl;
-                    orderout << "TIME: " << (localTime->tm_hour) << ":"
+                    orderout << "Time: " << (localTime->tm_hour) << ":"
                              << (localTime->tm_min < 10 ? "0" : "") << localTime->tm_min << endl;
                     orderout << "-------------------------------" << endl;
-                    orderout << "EATING LOCATION: DINE " << eating_location << endl;
+                    orderout << "Eating Location: Dine " << eating_location << endl;
                     orderout << "-------------------------------" << endl;
 
                     for (int i = 0; i < order_details.size(); i++)
                     {
-                        orderout << i + 1 << ")ITEM ID: " << order_details[i].save_id << endl
-                                 << "  ITEM NAME: " << order_details[i].save_name << endl
-                                 << "  ITEM QUANTITY: " << order_details[i].save_qty << endl
-                                 << "  ITEM UNITPRICE: " << order_details[i].save_unitprice << endl
-                                 << "  ITEM TOTAL: " << order_details[i].save_itemtotal << endl
+                        orderout << i + 1 << ")Item ID: " << order_details[i].save_id << endl
+                                 << "  Item Name: " << order_details[i].save_name << endl
+                                 << "  Item Quantity: " << order_details[i].save_qty << endl
+                                 << "  Item Unit Price: " << order_details[i].save_unitprice << endl
+                                 << "  Item Total: " << order_details[i].save_itemtotal << endl
                                  << endl;
                     }
 
                     orderout << "-------------------------------" << endl;
-                    orderout << "  SUBTOTAL: " << subtotal << endl;
+                    orderout << "  Subtotal: " << subtotal << endl;
                     orderout << "  CGST @ 2.5%: " << (2.5 / 100) * subtotal << endl;
                     orderout << "  SGST @ 2.5%: " << (2.5 / 100) * subtotal << endl;
                     orderout << "-------------------------------" << endl;
-                    orderout << "  GRAND TOTAL: " << total << endl;
+                    orderout << "  Grand Total: " << total << endl;
                     orderout << "-------------------------------" << endl;
                     orderout << "     THANK YOU VISIT AGAIN     " << endl;
                     orderout << "-------------------------------" << endl
@@ -891,118 +1121,30 @@ public:
                     orderout.close();
 
                     cout << endl
-                         << "  BILL SUSCESSFULLY SAVED IN RECEIPT.txt FILE." << endl;
-                    cout << "  THANK YOU! VISIT AGAIN..." << endl
-                         << endl;
+                         << "  Bill successfully saved in RECEIPT.txt file." << endl;
+                    cout << "  Thank you! Visit again." << endl;
                     cout << "=============================" << endl
                          << endl;
                 }
                 else
                 {
                     cout << endl
-                         << "YOUR ORDER HAS BEEN CANCELLED. THANK YOU FOR VISITING!" << endl;
+                         << "Your order has been cancelled. Thank you for visiting!" << endl;
                 }
             }
         }
     }
     // Take order funcn => End
 
-    void search_menu_item()
+    void search_menu_item() // Search menu item funcn => Start
     {
 
-        ifstream menu;
-        menu.open("MENU.txt");
-
-        // if (!menu)
-        // {
-        //     cout << "MENU FILE IS MISSING." << endl;
-        //     return;
-        // }
-
-        cin.ignore(1000000, '\n');
-
-        string searched_word;
-
-        while (true)
-        {
-            cout << "SEARCH: ";
-            getline(cin, searched_word);
-
-            if (searched_word.empty())
-            {
-                cout << "INVALID INPUT! SEARCH CANNOT BE BLANK." << endl;
-                continue;
-            }
-
-            bool validate_search = true;
-
-            for (int i = 0; i < searched_word.size(); i++)
-            {
-                if (!isalpha(searched_word[i]) && searched_word[i] != '_')
-                {
-                    validate_search = false;
-                    break;
-                }
-            }
-
-            if (!validate_search)
-            {
-                cout << "INVALID SEARCH!";
-                continue;
-            }
-
-            string formated_searched_word = final_menu_itemname(searched_word);
-
-            int id;
-            string name;
-            float price;
-            bool found = false;
-
-            cout << endl
-                 << "Id.  item Name       Price(Rs)" << endl
-                 << endl;
-
-            while (menu >> id >> name >> price)
-            {
-                bool match = false;
-
-                for (int i = 0; i <= name.size() - formated_searched_word.size(); i++)
-                {
-                    int j;
-                    for (j = 0; j < formated_searched_word.size(); j++)
-                    {
-                        if (name[i + j] != formated_searched_word[j])
-                        {
-                            break;
-                        }
-                    }
-                    if (j == formated_searched_word.size())
-                    {
-                        match = true;
-                        break;
-                    }
-                }
-
-                if (match)
-                {
-                    cout << id << "    " << name << "     " << price << endl;
-                    found = true;
-                }
-            }
-
-            if (!found)
-            {
-                cout << "Item not found." << endl;
-            }
-            else
-            {
-                break;
-            }
-        }
-        menu.close();
     }
+    // Search menu item funcn => End
 
-    vector<usable_menu> sort_menu_pricelowtohigh()
+
+    // Function to sort menu items by price low to high
+    vector<usable_menu> sort_menu_pricelowtohigh() // sort_menu_pricelowtohigh funcn => Start
     {
         vector<usable_menu> sorted_menu;
         ifstream menu;
@@ -1019,8 +1161,11 @@ public:
 
         return sorted_menu;
     }
+    // sort_menu_pricelowtohigh funcn => End
 
-    vector<usable_menu> sort_menu_pricehightolow()
+
+    // Function to sort menu items by price high to low
+    vector<usable_menu> sort_menu_pricehightolow() // sort_menu_pricehightolow funcn => Start
     {
         vector<usable_menu> sorted_menu;
         ifstream menu;
@@ -1037,8 +1182,11 @@ public:
 
         return sorted_menu;
     }
+    // sort_menu_pricehightolow funcn => End
 
-    vector<usable_menu> sort_menu_alphabaticalorder()
+
+    // Function to sort menu items in alphabetical order
+    vector<usable_menu> sort_menu_alphabaticalorder() // sort_menu_alphabaticalorder funcn => Start
     {
         vector<usable_menu> sorted_menu;
         ifstream menu;
@@ -1055,8 +1203,10 @@ public:
 
         return sorted_menu;
     } 
+    // sort_menu_alphabaticalorder funcn => End
 
-    void view_order_history()
+    // Function to view order history    
+    void view_order_history() // view_order_history funcn => Start
     {
         ifstream order_history;
         order_history.open("ORDER.txt");
@@ -1068,18 +1218,19 @@ public:
             cout << line <<endl;
         }        
     }
+    // view_order_history funcn => End
 };
 
 // Static int for order num
 int RMOS::order_no = 0;
 
-int main()
+int main() 
 {
-    int orders = INT_MAX;
-    for (int i = 1; i <= orders; i++)
+    int orders = INT_MAX; // Maximum number of orders can be set to INT_MAX for continuous operation
+    for (int i = 1; i <= orders; i++) // Loop for each order
     {
         RMOS new_order;
-        cout << "RESTARTING...SYSTEM" << endl;
+        cout << "Restarting..." << endl;
     }
 
     return 0;
