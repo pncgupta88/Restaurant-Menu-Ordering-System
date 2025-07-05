@@ -68,49 +68,8 @@ public:
 
         else if (first_choice == 2) // first_choice (SEARCH ITEM IN MENU AND PLACE ORDER.) => Start
         {
-            char searchmore = 'Y';
-
-            while (searchmore == 'Y' || searchmore == 'y')
-            {
-                cout << endl;
-                display_menu();
-
-                search_menu_item();
-                cout << endl
-                     << "Do you want to search more items? (Y/N): ";
-
-                while (!(cin >> searchmore) || (searchmore != 'y' && searchmore != 'Y' && searchmore != 'n' && searchmore != 'N'))
-                {
-                    cout << "Invalid input! Do you want to search more items? (Y/N): ";
-                    cin.clear();
-                    cin.ignore(10000, '\n');
-                }
-
-                if (searchmore == 'N' || searchmore == 'n')
-                {
-                    char g_OR_y;
-                    cout << endl
-                         << "Do you want to give order or return to home screen (g/r): ";
-                    while (!(cin >> g_OR_y) || (g_OR_y != 'g' && g_OR_y != 'G' && g_OR_y != 'r' && g_OR_y != 'R'))
-                    {
-                        cout << "Invalid input! Do you want to give order or return to home screen (g/r): ";
-                        cin.clear();
-                        cin.ignore(10000, '\n');
-                    }
-
-                    if (g_OR_y == 'g' || g_OR_y == 'G')
-                    {
-                        cout << endl
-                             << "Give your order: " << endl
-                             << endl;
-                        take_order();
-                    }
-                    else
-                    {
-                        return;
-                    }
-                }
-            }
+            cout << endl << "Not implemented yet." << endl << endl;
+            return; 
         }
         // first_choice (SEARCH ITEM IN MENU AND PLACE ORDER.) => End
 
@@ -931,11 +890,11 @@ public:
         time_t now = time(0);
         tm *localTime = localtime(&now);
 
-        string eating_location;
-        cout << "Enter eating location (In/Out): ";
-        while (!(cin >> eating_location) || (eating_location != "IN" && eating_location != "in" && eating_location != "OUT" && eating_location != "out"))
+        string entered_eating_location;
+        cout << "Enter eating location (in/out): ";
+        while (!(cin >> entered_eating_location) || (entered_eating_location != "IN" && entered_eating_location != "in" && entered_eating_location != "OUT" && entered_eating_location != "out"))
         {
-            cout << "Invalid eating location! Enter eating location (In/Out): ";
+            cout << "Invalid eating location! Enter eating location (in/out): ";
             cin.clear();
             cin.ignore(10000, '\n');
         }
@@ -1179,94 +1138,11 @@ public:
     }
     // Take order funcn => End
 
-    void search_menu_item() // Search menu item funcn => Start
-    {
+    // void search_menu_item() // Search menu item funcn => Start
+    // {
 
-        ifstream menu;
-        menu.open("MENU.txt");
-
-        cin.ignore(1000000, '\n');
-
-        string searched_word;
-
-        while (true)
-        {
-            cout << "Search: ";
-            getline(cin, searched_word);
-
-            if (searched_word.empty())
-            {
-                cout << "Invalid input! Search cannot be blank." << endl;
-                continue;
-            }
-
-            bool validate_search = true;
-
-            for (int i = 0; i < searched_word.size(); i++)
-            {
-                if (!isalpha(searched_word[i]) && searched_word[i] != '_')
-                {
-                    validate_search = false;
-                    break;
-                }
-            }
-
-            if (!validate_search)
-            {
-                cout << "Invalid search!";
-                continue;
-            }
-
-            string formated_searched_word = final_menu_itemname(searched_word);
-
-            int id;
-            string name;
-            float price;
-            bool found = false;
-
-            cout << endl
-                 << "Id.  item Name       Price(Rs)" << endl
-                 << endl;
-
-            while (menu >> id >> name >> price)
-            {
-                bool match = false;
-
-                for (int i = 0; i <= name.size() - formated_searched_word.size(); i++)
-                {
-                    int j;
-                    for (j = 0; j < formated_searched_word.size(); j++)
-                    {
-                        if (name[i + j] != formated_searched_word[j])
-                        {
-                            break;
-                        }
-                    }
-                    if (j == formated_searched_word.size())
-                    {
-                        match = true;
-                        break;
-                    }
-                }
-
-                if (match)
-                {
-                    cout << id << "    " << name << "     " << price << endl;
-                    found = true;
-                }
-            }
-
-            if (!found)
-            {
-                cout << "Item not found." << endl;
-            }
-            else
-            {
-                break;
-            }
-        }
-        menu.close();
-    }
+        
+    // }
     // Search menu item funcn => End
 
 
