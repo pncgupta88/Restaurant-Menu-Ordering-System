@@ -1138,11 +1138,94 @@ public:
     }
     // Take order funcn => End
 
-    // void search_menu_item() // Search menu item funcn => Start
-    // {
+     // for search itmes by name .
+    void search_menu_item()
+    {
+        ifstream menu;
+        menu.open("MENU.txt");
 
-        
-    // }
+        cin.ignore(1000000, '\n');
+
+        string searched_word;
+
+        while (true)
+        {
+            cout << "Search: ";
+            getline(cin, searched_word);
+
+            if (searched_word.empty())
+            {
+                cout << "Invalid input! Search cannot be blank." << endl;
+                continue;
+            }
+
+            bool validate_search = true;
+
+            for (int i = 0; i < searched_word.size(); i++)
+            {
+                if (!isalpha(searched_word[i]) && searched_word[i] != '_')
+                {
+                    validate_search = false;
+                    break;
+                }
+            }
+
+            if (!validate_search)
+            {
+                cout << "Invalid search!";
+                continue;
+            }
+
+            string formated_searched_word = final_menu_itemname(searched_word);
+
+            int id;
+            string name;
+            float price;
+            bool found = false;
+
+            cout << endl
+                 << "Id.  item Name       Price(Rs)" << endl
+                 << endl;
+
+            while (menu >> id >> name >> price)
+            {
+                bool match = false;
+
+                for (int i = 0; i <= name.size() - formated_searched_word.size(); i++)
+                {
+                    int j;
+                    for (j = 0; j < formated_searched_word.size(); j++)
+                    {
+                        if (name[i + j] != formated_searched_word[j])
+                        {
+                            break;
+                        }
+                    }
+                    if (j == formated_searched_word.size())
+                    {
+                        match = true;
+                        break;
+                    }
+                }
+
+                if (match)
+                {
+                    cout << id << "    " << name << "     " << price << endl;
+                    found = true;
+                }
+            }
+
+            if (!found)
+            {
+                cout << "Item not found." << endl;
+            }
+            else
+            {
+                break;
+            }
+        }
+        menu.close();
+    }
     // Search menu item funcn => End
 
 
