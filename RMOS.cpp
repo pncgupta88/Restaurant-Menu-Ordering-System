@@ -395,13 +395,25 @@ public:
                         vector<usable_menu> menu = copymenuitems();
                         while (true)
                         {
-                            cout << "Enter Item ID: ";
+                            string id_input_top;
                             int entered_id_to_modify;
-                            while (!(cin >> entered_id_to_modify))
+
+                            while (true)
                             {
-                                cout << "Invalid Input! Enter Item ID From Menu: ";
-                                cin.clear();
-                                cin.ignore(10000, '\n');
+                                cout << "Enter Item ID: ";
+                                getline(cin >> ws, id_input_top); // read full line safely
+
+                                bool is_number = !id_input_top.empty() &&
+                                                 all_of(id_input_top.begin(), id_input_top.end(), ::isdigit);
+
+                                if (!is_number)
+                                {
+                                    cout << "Invalid Input! Item ID must be a number.\n";
+                                    continue;
+                                }
+
+                                entered_id_to_modify = stoi(id_input_top);
+                                break;
                             }
 
                             // checking for valid id
@@ -420,7 +432,7 @@ public:
 
                             if (!valid_orderid)
                             {
-                                cout << "Invalid Item ID! ";
+                                cout << "Invalid Item ID! ID Doesn't Exist. \n";
                                 continue;
                             }
                             // checked for valid id
@@ -462,9 +474,23 @@ public:
                                 // function for editing id
                                 if (edit_data == 1)
                                 {
-                                    int new_id;
+                                    string id_input;
                                     cout << "\nEnter The New Item ID: ";
-                                    cin >> new_id;
+                                    cin.ignore();
+                                    getline(cin, id_input);
+
+                                    // Check if input is fully numeric
+                                    bool is_number = !id_input.empty() &&
+                                                     all_of(id_input.begin(), id_input.end(), ::isdigit);
+
+                                    if (!is_number)
+                                    {
+                                        cout << "Invalid Input! Item ID must be a number.\n";
+                                        continue;
+                                    }
+
+                                    // Safe conversion of string to int
+                                    int new_id = stoi(id_input);
 
                                     // Check for duplicate
                                     bool new_valid_id = false;
@@ -500,32 +526,57 @@ public:
                                 else if (edit_data == 2)
                                 {
                                     string new_name;
-                                    cout << "\nEnter The New Item Name: ";
-                                    cin >> new_name;
-
-                                    // Check for duplicate
-                                    bool name_exists = false;
-                                    for (int i = 0; i < menu.size(); i++)
+                                    while (true)
                                     {
-                                        if (menu[i].item_name == new_name)
+                                        cout << "\nEnter The New Item Name: ";
+
+                                        // Check for duplicate
+                                        getline(cin >> ws, new_name);
+
+                                        if (new_name.empty())
                                         {
-                                            name_exists = true;
+                                            cout << "\nInvalid Itemname! Name Cannot Be Blank.\n";
+                                            continue;
+                                        }
+
+                                        bool valid_itemname = true;
+
+                                        for (int i = 0; i < new_name.size(); i++)
+                                        {
+                                            if (!isalpha(new_name[i]) && new_name[i] != '_')
+                                            {
+                                                valid_itemname = false;
+                                                break;
+                                            }
+                                        }
+
+                                        if (!valid_itemname)
+                                        {
+                                            cout << "\nInvalid Itemname!\n ";
+                                            continue;
+                                        }
+
+                                        if (check_duplicate_menu_items(new_name))
+                                        {
+                                            cout << endl
+                                                 << "Item Already Exists In Menu!" << endl;
+
+                                            continue;
+                                        }
+                                        else
+                                        {
                                             break;
                                         }
                                     }
 
-                                    if (name_exists)
-                                    {
-                                        cout << "Item Name Already Exists! Please Choose A Different Name.\n";
-                                        continue;
-                                    }
+                                    string final_new_name = final_menu_itemname(new_name);
 
                                     // Assign the new name
                                     for (int i = 0; i < menu.size(); i++)
                                     {
                                         if (menu[i].item_id == entered_id_to_modify)
                                         {
-                                            menu[i].item_name = new_name;
+                                            menu[i].item_name = final_new_name;
                                             cout << "Item Edited Successfully.\n";
                                             break;
                                         }
@@ -569,32 +620,36 @@ public:
                                 {
                                     continue;
                                 }
+
+                                // Sort menu by item_id after modification
+                                sort(menu.begin(), menu.end(), [](const usable_menu &a, const usable_menu &b)
+                                     { return a.item_id < b.item_id; });
                             }
 
                             char edit_another;
-                            cout << "Edit another item? (Y/N): ";
+                            cout << "\nEdit another item? (Y/N): ";
 
                             while (!(cin >> edit_another) || (edit_another != 'Y' && edit_another != 'y' && edit_another != 'N' && edit_another != 'n'))
-                                {
-                                    cout << "Invalid Input! Enter Y/y Or N/n: ";
-                                    cin.clear();
-                                    cin.ignore(10000, '\n');
-                                }
+                            {
+                                cout << "Invalid Input! Enter Y/y Or N/n: ";
+                                cin.clear();
+                                cin.ignore(10000, '\n');
+                            }
 
-                                if (edit_another == 'N' || edit_another == 'n')
-                                {
-                                    break;
-                                }
+                            if (edit_another == 'N' || edit_another == 'n')
+                            {
+                                display_menu();
+                                break;
+                            }
 
-                                else
-                                {
-                                    continue;
-                                }
+                            else
+                            {
+                                continue;
+                            }
                         }
 
                         // editing in menu
-                        ofstream out;
-                        out.open("MENU.txt");
+                        ofstream out("MENU.txt");
                         for (const auto &item : menu)
                         {
                             out << item.item_id << "   " << item.item_name << "        " << item.item_price << endl;
