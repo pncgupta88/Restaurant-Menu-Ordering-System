@@ -23,4 +23,4 @@
 23   Kachori             15
 24   Vadapav             30
 25   Pyaaz_Kachori       30
-26   Mirchi_Vada         20
+26   Mirchi_Bada         20
